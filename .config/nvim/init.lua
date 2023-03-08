@@ -1,8 +1,8 @@
 --
 -- nvim
 -- ============================================
-local ok, err = pcall(require, "xj")
+local ok, err = pcall(require, 'xj')
 
 if not ok then
-    error(("Error loading xj...\n\n%s"):format(err))
+    error(('Error loading xj...\n\n%s'):format(err))
 end
