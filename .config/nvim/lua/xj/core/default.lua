@@ -20,23 +20,30 @@ local default = {
         on_attach_mappings = {},
         -- lsp servers that should be installed
         ensure_installed = {
-            'astro',
-            --[[ 'actionlint', ]]
-            --[[ 'eslint_d', ]]
-            --[[ 'prettierd', ]]
-            'bashls',
-            'cssls',
-            'gopls',
-            'graphql',
-            'html',
-            'jsonls',
-            'tsserver',
-            'lua_ls',
-            'pyright',
-            'svelte',
-            'tailwindcss',
-            'yamlls'
+            lsp_server = {
+                'astro',
+                'bashls',
+                'cssls',
+                'gopls',
+                'graphql',
+                'html',
+                'jsonls',
+                'tsserver',
+                'lua_ls',
+                'pyright',
+                'svelte',
+                'tailwindcss',
+                'yamlls'
+            },
+            formatter = {
+                'prettierd'
+            },
+            linter = {
+                'actionlint',
+                'eslint_d'
+            }
         },
+        --TODO REMOVEALBE 
         -- lsp servers that should be enabled
         servers = {
             astro = true,
