@@ -1,11 +1,11 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local M = {}
 local augroup_name = 'XJNvimLspFormat'
 local group = vim.api.nvim_create_augroup(augroup_name, {
     clear = true
 })
 local conf = require('xj.core.config')
 
+local M = {}
 function M.on_attach(client, bufnr)
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
@@ -16,7 +16,7 @@ function M.on_attach(client, bufnr)
 
     if client.supports_method('textDocument/formatting') then
         -- set up :LspFormat for clients that are capable
-        vim.cmd(string.format('command! LspFormat lua require(\'xj.utility.lsp\').format(%s)', bufnr))
+        vim.cmd(string.format('command! LspFormat lua require(\'xj.lsp.utility\').format(%s)', bufnr))
 
         -- set up auto format on save
         if conf.lsp.format_on_save then
@@ -38,7 +38,7 @@ function M.on_attach(client, bufnr)
             -- autocommand for format on save with specified filetype(s)
             vim.api.nvim_create_autocmd(string.format('BufWritePre %s', filetype_pattern), {
                 callback = function()
-                    require('xj.utility.lsp').format(bufnr)
+                    require('xj.lsp.utility').format(bufnr)
                 end,
                 buffer = bufnr,
                 group = group

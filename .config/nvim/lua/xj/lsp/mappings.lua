@@ -1,5 +1,5 @@
 local utils = require('xj.utility')
-local lsp_utils = require('xj.utility.lsp')
+local lsp_utils = require('xj.lsp.utility')
 local M = {}
 
 -- Mappings.
