@@ -39,10 +39,6 @@ return {
     event = 'VeryLazy',
     config = function()
         require('lualine').setup(vim.tbl_deep_extend('force', {
-            --TODO
-            -- options = {
-            --     theme = 'tokyonight'
-            -- },
             sections = {
                 lualine_a = {
                     'mode'
