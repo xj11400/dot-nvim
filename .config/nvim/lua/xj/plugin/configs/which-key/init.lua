@@ -68,7 +68,7 @@ return {
                 g = {
                     name = '+goto'
                 },
-                n = {
+                e = {
                     name = '+tree'
                 },
                 s = {
@@ -85,6 +85,11 @@ return {
                     t = {
                         name = '+toggle'
                     }
+                }
+            },
+            ['<localleader>'] = {
+                p = {
+                    name = '+plugin'
                 }
             }
         })
