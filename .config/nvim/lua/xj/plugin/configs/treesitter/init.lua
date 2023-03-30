@@ -32,6 +32,7 @@ return {
                 'scss',
                 'tsx',
                 'typescript',
+                'vim',
                 'yaml'
             },
             highlight = {
