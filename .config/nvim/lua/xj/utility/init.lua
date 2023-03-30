@@ -5,37 +5,26 @@ function M.map(mode, lhs, rhs, opts)
         silent = true,
         noremap = true
     }
-    vim.keymap.set(mode, lhs, rhs, M.merge(defaults, opts or {}))
+    vim.keymap.set(mode, lhs, rhs, vim.tbl_deep_extend('force', defaults, opts or {}))
 end
 
 function M.create_buf_map(bufnr, opts)
     return function(mode, lhs, rhs, map_opts)
-        M.map(mode, lhs, rhs, M.merge({
+        M.map(mode, lhs, rhs, vim.tbl_deep_extend('force', {
             buffer = bufnr
         }, opts or {}, map_opts or {}))
     end
 end
 
-function M.merge_list(tbl1, tbl2)
-    for _, v in ipairs(tbl2) do
-        table.insert(tbl1, v)
-    end
-    return tbl1
-end
-
-function M.merge(...)
-    return vim.tbl_deep_extend('force', ...)
-end
-
-function M.split(str, sep)
-    local res = {}
-    for w in str:gmatch('([^' .. sep .. ']*)') do
-        if w ~= '' then
-            table.insert(res, w)
-        end
-    end
-    return res
-end
+-- function M.split(str, sep)
+--     local res = {}
+--     for w in str:gmatch('([^' .. sep .. ']*)') do
+--         if w ~= '' then
+--             table.insert(res, w)
+--         end
+--     end
+--     return res
+-- end
 
 function M.get_short_file_path(path)
     local dirs = {}
