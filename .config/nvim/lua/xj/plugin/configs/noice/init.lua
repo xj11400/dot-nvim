@@ -8,7 +8,7 @@ return {
         'rcarriga/nvim-notify'
     },
     config = function()
-        local config = vim.tbl_deep_extend('force', {
+        require('noice').setup(vim.tbl_deep_extend('force', {
             presets = {
                 lsp_doc_border = true
             },
@@ -31,9 +31,7 @@ return {
                     ['cmp.entry.get_documentation'] = false
                 }
             }
-        }, conf.plugins.noice or {})
-
-        require('noice').setup(config)
+        }, conf.plugins.noice or {}))
 
         map('n', '<c-j>', function()
             if not require('noice.lsp').scroll(4) then
