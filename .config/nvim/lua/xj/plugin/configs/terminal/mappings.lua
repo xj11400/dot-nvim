@@ -1,6 +1,7 @@
 local map = require('xj.utility').map
 
-map('n', '<C-l>', ':FloatermToggle<CR>', { desc = 'Toggle Floaterm' })
+map('n', '<leader>`', ':FloatermToggle<CR>', { desc = 'Toggle Floaterm' })
+map('t', '<leader>`', [[<C-\><C-n>:FloatermToggle<CR>]], { desc = 'Close Floaterm' })
 map('t', '<C-l>', [[<C-\><C-n>]], { desc = 'Close Floaterm' })
 map('t', '<C-w>l', [[<C-\><C-n>:FloatermNext<CR>]], { desc = 'Next terminal' })
 map('t', '<C-w>h', [[<C-\><C-n>:FloatermPrev<CR>]], { desc = 'Prev terminal' })

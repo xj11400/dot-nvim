@@ -8,9 +8,19 @@ return {
     },
     keys = {
         {
-            '<C-l>',
+            '<leader>`',
             '<cmd>FloatermToggle<cr>',
             desc = 'Floating Terminal'
+        },
+        {
+            '<localleader>g',
+            '<cmd>FloatermNew lazygit<cr>',
+            desc = 'Lazygit'
+        },
+        {
+            '<localleader>r',
+            '<cmd>FloatermNew ranger<cr>',
+            desc = 'Ranger'
         }
     },
     config = function()
