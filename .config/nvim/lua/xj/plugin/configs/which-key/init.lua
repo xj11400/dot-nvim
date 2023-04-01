@@ -85,7 +85,10 @@ return {
                     t = {
                         name = '+toggle'
                     }
-                }
+                },
+                z = {
+                    name = '+z'
+                },
             },
             ['<localleader>'] = {
                 p = {
