@@ -5,6 +5,13 @@ return {
     cmd = {
         'ColorizerToggle'
     },
+    keys = {
+        {
+            '<leader>zc',
+            '<cmd>ColorizerToggle<cr>',
+            desc = 'Colorizer'
+        }
+    },
     config = function()
         require('colorizer').setup(vim.tbl_deep_extend('force', {}, conf.plugins.colorizer or {}))
     end,
