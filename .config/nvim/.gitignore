@@ -1,0 +1,10 @@
+# Project gitignore
+docs
+plugin
+ftplugin
+spell
+.luarc.json
+ginit.vim
+
+# test
+.tmp
