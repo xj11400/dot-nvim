@@ -1,0 +1,59 @@
+- xj
+    - user/custom
+        - plugins/
+            *other plugins*
+        - mappings
+        - editors
+        - commands
+
+    - config/
+        - lsp/
+            *lsp config*
+        - plugin
+            *plugin setting*
+        - mappings
+            *editor mappings*
+        - options
+            *editor options*
+        - commands
+
+    - core/
+        - icons/
+            - text
+            - nerd_fonts
+        - utility/
+            - init
+        - config
+            *loading all configs*
+        - init
+            *loading all*
+        - plugin
+            *plugin manager config*
+        - lazy
+            *plugin manager*
+
+        - xj
+            *updaate self*
+
+    - plugins/
+        - ...
+
+### mapping
+
+`plugin/mapping` -> `config/mapping`-> `user/mapping`
+
+setting mapping as last
+
+core/utils/mapping() when plugin setting
+-- save to _G.xj.mapping
+
+### option
+
+`config/options` -> `user/options`
+
+### plugin
+
+- xxx
+  - config
+  - init
+  - mapping

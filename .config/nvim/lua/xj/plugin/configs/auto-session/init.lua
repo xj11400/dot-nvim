@@ -18,5 +18,6 @@ return {
     init = function()
         require('xj.plugin.configs.auto-session.mappings')
     end,
-    enabled = not vim.tbl_contains(conf.disable_builtin_plugins, 'auto-session')
+    -- enabled = not vim.tbl_contains(conf.disable_builtin_plugins, 'auto-session')
+    enabled = false
 }

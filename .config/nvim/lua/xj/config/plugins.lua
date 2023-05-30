@@ -1,7 +1,4 @@
--- [MOVE] config/plugins
-
--- default config
-local default = {
+return {
     border = 'rounded',
     disable_builtin_plugins = {},
     add_plugins = {},
@@ -65,5 +62,3 @@ local default = {
         }
     }
 }
-
-return default
