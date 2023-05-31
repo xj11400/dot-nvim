@@ -13,7 +13,7 @@ local c = require("xjtheme.palettes.vsc_colors")
 local function callback()
   return {
     -- Comment
-    Comment = { fg = c.vscGreen, bg = c.vscNone },
+    Comment = { fg = c.vscGray, bg = c.vscNone },
     -- Constant
     Constant = { fg = c.vscBlue, bg = c.vscNone },
     String = { fg = c.vscOrange, bg = c.vscNone },
