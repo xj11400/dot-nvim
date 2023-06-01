@@ -27,20 +27,24 @@ local localsections = {
 -- Standard Operations
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
-maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
-maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
-maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
 maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
-maps.n["<leader>W"] = { "<cmd>w!<cr>", desc = "Force write" }
-maps.n["<leader>Q"] = { "<cmd>qa<cr>", desc = "Quit all" }
-maps.n["<leader>y"] = { "\"+y", desc = "Copy to +" }
-maps.n["<leader>p"] = { "\"+p", desc = "Paste from +" }
-maps.v["<leader>y"] = { "\"+y", desc = "Copy to +" }
-maps.v["<leader>p"] = { "\"+p", desc = "Paste from +" }
+
+-- yank, paste, serch
+maps.n["<leader>y"] = { "\"+y", desc = "+Copy" }
+maps.n["<leader>p"] = { "\"+p", desc = "+Paste" }
+maps.v["<leader>y"] = { "\"+y", desc = "+Copy" }
+maps.v["<leader>p"] = { "\"+p", desc = "+Paste" }
 maps.v["p"] = { "p:let @\"=@0<CR>", desc = "Paste" }
 maps.v["*"] = { "y/<C-R>\"<CR>", desc = "Visual search *" }
 maps.v["#"] = { "y?<C-R>\"<CR>", desc = "Visual search #" }
 maps.n["<C-n>"] = { ":noh<CR>", desc = "No heighlight" }
+
+-- file
+maps.n["<localleader>w"] = { "<cmd>w<cr>", desc = get_icon("Save", 1, true) .. "Save" }
+maps.n["<localleader>q"] = { "<cmd>confirm q<cr>", desc = get_icon("PowerOff", 1, true) .. "Quit" }
+maps.n["<localleader>W"] = { "<cmd>w!<cr>", desc = get_icon("ForceWrite", 1, true) .. "Force write" }
+maps.n["<localleader>Q"] = { "<cmd>qa<cr>", desc = get_icon("PowerOff", 1, true) .. "Quit all" }
+maps.n["<localleader>n"] = { "<cmd>enew<cr>", desc = get_icon("FileNew", 1, true) .. "New File" }
 
 --- Insert mode
 -- maps.i['<C-b>'] = { '<C-o>h', desc = 'Left' }
@@ -173,7 +177,7 @@ if is_available "alpha-nvim" then
       end
       require("alpha").start(false, require("alpha").default_config)
     end,
-    desc = "Home Screen",
+    desc = get_icon("Home", 1, true) .. "Home Screen",
   }
 end
 
@@ -479,13 +483,9 @@ maps.n["<localleader>uw"] = { ui.toggle_wrap, desc = "Toggle wrap" }
 maps.n["<localleader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlight" }
 maps.n["<localleader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
 
+maps.n["<localleader>t"] = localsections.toggle
 if is_available "auto-save.nvim" then
-  maps.n["<localleader>uA"] = { "<cmd>ASToggle<cr>", desc = "Toggle AutoSave" }
+  maps.n["<localleader>ts"] = { "<cmd>ASToggle<cr>", desc = "Toggle AutoSave" }
 end
-
--- maps.n["<localleader>t"] = localsections.toggle
--- if is_available "auto-save.nvim" then
---   maps.n["<localleader>ts"] = { "<cmd>ASToggle<cr>", desc = "Toggle AutoSave" }
--- end
 
 utils.set_mappings(xj.user_opts("mappings", maps))

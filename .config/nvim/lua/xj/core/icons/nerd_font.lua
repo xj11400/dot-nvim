@@ -58,4 +58,8 @@ return {
   Toggle = "󰨙",
   Window = "",
   WordFile = "󰈭",
+  Home = "",
+  PowerOff = "",
+  Save = "",
+  ForceWrite = "",
 }
