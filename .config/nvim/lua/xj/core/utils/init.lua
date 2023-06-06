@@ -168,9 +168,11 @@ end
 ---@return table # A button entity table for an alpha configuration
 function M.alpha_button(sc, txt)
   -- replace <leader> in shortcut text with LDR for nicer printing
-  local sc_ = sc:gsub("%s", ""):gsub("LDR", "<leader>")
+  local sc_ = sc:gsub("%s", ""):gsub("LDR", "<leader>"):gsub("LOL","<localleader>")
   -- if the leader is set, replace the text with the actual leader key for nicer printing
   if vim.g.mapleader then sc = sc:gsub("LDR", vim.g.mapleader == " " and "SPC" or vim.g.mapleader) end
+  -- if the localleader is set, replace the text with the actual localleader key for nicer printing
+  if vim.g.mapleader then sc = sc:gsub("LOL", vim.g.maplocalleader == "\\" and "BSL" or vim.g.maplocalleader) end
   -- return the button entity to display the correct text and send the correct keybinding on press
   return {
     type = "button",
