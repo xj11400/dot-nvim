@@ -21,7 +21,23 @@ return {
   { "s1n7ax/nvim-window-picker", opts = { use_winbar = "smart" } },
   {
     "mrjones2014/smart-splits.nvim",
-    opts = { ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" }, ignored_buftypes = { "nofile" } },
+    opts = {
+      ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" },
+      ignored_buftypes = { "nofile" } ,
+      -- the default number of lines/columns to resize by at a time
+      default_amount = 2,
+      resize_mode = {
+        silent = true,
+        hooks = {
+          on_enter = function()
+            print('Entering resize mode')
+          end,
+          -- on_leave = function()
+          --   print('Exiting resize mode')
+          -- end,
+        },
+      },
+    },
   },
   {
     "windwp/nvim-autopairs",
