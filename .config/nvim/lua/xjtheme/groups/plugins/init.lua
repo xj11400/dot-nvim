@@ -6,6 +6,7 @@ return {
   ["gitsigns.nvim"] = "gitsigns",
   ["hop.nvim"] = "hop",
   ["indent-blankline.nvim"] = "indent-blankline",
+  ["leap.nvim"] = "leap",
   ["lightspeed.nvim"] = "lightspeed",
   ["neo-tree.nvim"] = "neo-tree",
   ["nvim-cmp"] = "nvim-cmp",
