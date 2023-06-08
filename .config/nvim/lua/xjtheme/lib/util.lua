@@ -42,6 +42,10 @@ end
 function M.set_palettes(opts)
   local palette = require("xjtheme.palettes." .. opts.palette)
   palette = vim.tbl_deep_extend("force", palette, opts.palettes.global)
+
+  local colors = require("xjtheme.colors")
+  palette = vim.tbl_deep_extend("keep", palette, colors)
+
   return vim.tbl_deep_extend("force", palette, opts.palettes[opts.palette])
 end
 
