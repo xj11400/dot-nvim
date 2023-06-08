@@ -377,10 +377,17 @@ if is_available "toggleterm.nvim" then
   maps.n["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" }
   maps.n["<leader>`"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
   maps.t["<leader>`"] = maps.n["<leader>`"]
+  maps.t["<leader><esc>"] = { "<C-\\><C-n>", desc = "Toggle terminal visual" }
   -- maps.n["<F7>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
   -- maps.t["<F7>"] = maps.n["<F7>"]
   -- maps.n["<C-'>"] = maps.n["<F7>"] -- requires terminal that supports binding <C-'>
   -- maps.t["<C-'>"] = maps.n["<F7>"] -- requires terminal that supports binding <C-'>
+end
+
+if is_available "vim-floaterm" then
+  if vim.fn.executable "ranger" == 1 then
+    maps.n["<leader>tr"] = {'<cmd>FloatermNew ranger<cr>', desc = 'Floaterm Ranger'}
+  end
 end
 
 if is_available "nvim-dap" then
@@ -483,6 +490,7 @@ maps.n["<localleader>uw"] = { ui.toggle_wrap, desc = "Toggle wrap" }
 maps.n["<localleader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlight" }
 maps.n["<localleader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
 
+-- Toggle
 maps.n["<localleader>t"] = localsections.toggle
 if is_available "auto-save.nvim" then
   maps.n["<localleader>ts"] = { "<cmd>ASToggle<cr>", desc = "Toggle AutoSave" }
