@@ -29,6 +29,12 @@ maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor do
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
 maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
 
+-- resize split
+maps.n["<C-w>H"]= { "<cmd>resize -2<CR>", desc = "Resize split up" }
+maps.n["<C-w>J"] = { "<cmd>resize +2<CR>", desc = "Resize split down" }
+maps.n["<C-w>K"] = { "<cmd>vertical resize -2<CR>", desc = "Resize split left" }
+maps.n["<C-w>L"] = { "<cmd>vertical resize +2<CR>", desc = "Resize split right" }
+
 -- yank, paste, serch
 maps.n["<leader>y"] = { "\"+y", desc = "+Copy" }
 maps.n["<leader>p"] = { "\"+p", desc = "+Paste" }
@@ -255,23 +261,16 @@ end
 
 -- Smart Splits
 if is_available "smart-splits.nvim" then
-  maps.n["<C-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" }
-  maps.n["<C-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
-  maps.n["<C-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
-  maps.n["<C-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
-  maps.n["<C-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" }
-  maps.n["<C-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" }
-  maps.n["<C-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" }
-  maps.n["<C-Right>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" }
-else
-  maps.n["<C-h>"] = { "<C-w>h", desc = "Move to left split" }
-  maps.n["<C-j>"] = { "<C-w>j", desc = "Move to below split" }
-  maps.n["<C-k>"] = { "<C-w>k", desc = "Move to above split" }
-  maps.n["<C-l>"] = { "<C-w>l", desc = "Move to right split" }
-  maps.n["<C-Up>"] = { "<cmd>resize -2<CR>", desc = "Resize split up" }
-  maps.n["<C-Down>"] = { "<cmd>resize +2<CR>", desc = "Resize split down" }
-  maps.n["<C-Left>"] = { "<cmd>vertical resize -2<CR>", desc = "Resize split left" }
-  maps.n["<C-Right>"] = { "<cmd>vertical resize +2<CR>", desc = "Resize split right" }
+  maps.n["<C-w>h"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" }
+  maps.n["<C-w>j"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
+  maps.n["<C-w>k"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
+  maps.n["<C-w>l"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
+  maps.n["<C-w>r"] = { function() require("smart-splits").start_resize_mode() end, desc = "Start resize mode" }
+  maps.n["<C-w>x"] = { desc = "Swap Window" }
+  maps.n["<C-w>xh"] = { function() require('smart-splits').swap_buf_left() end, desc = "Swap window with left"}
+  maps.n["<C-w>xj"] = { function() require('smart-splits').swap_buf_down() end, desc = "Swap window with down"}
+  maps.n["<C-w>xk"] = { function() require('smart-splits').swap_buf_up() end, desc = "Swap window with up"}
+  maps.n["<C-w>xl"] = { function() require('smart-splits').swap_buf_right() end, desc = "Swap window with right"}
 end
 
 -- SymbolsOutline
