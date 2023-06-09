@@ -29,6 +29,14 @@ maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor do
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
 maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
 
+-- move
+maps.n["J"] = { ":m .+1<CR>==", desc = "Move line down" }
+maps.n["K"] = { ":m .-2<CR>==", desc = "Move line up" }
+maps.v["J"] = { ":m '>+1<CR>gv=gv", desc = "Move line down" }
+maps.v["K"] = { ":m '<-2<CR>gv=gv", desc = "Move line up" }
+-- maps.i["<C-M-J>"] = { "<Esc>:m .+1<CR>==gi", desc = "Move line down" }
+-- maps.i["<C-M-K>"] = { "<Esc>:m .-2<CR>==gi", desc = "Move line up" }
+
 -- resize split
 maps.n["<C-w>H"]= { "<cmd>resize -2<CR>", desc = "Resize split up" }
 maps.n["<C-w>J"] = { "<cmd>resize +2<CR>", desc = "Resize split down" }
