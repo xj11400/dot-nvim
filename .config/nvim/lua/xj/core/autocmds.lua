@@ -253,16 +253,16 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
 })
 
 cmd(
-  "ZXChangelog",
+  "XXXChangelog",
   function() require("xj.core.utils.updater").changelog() end,
   { desc = "Check XXXNvim Changelog" }
 )
 cmd(
-  "ZXUpdatePackages",
+  "XXXUpdatePackages",
   function() require("xj.core.utils.updater").update_packages() end,
   { desc = "Update Plugins and Mason" }
 )
-cmd("ZXRollback", function() require("xj.core.utils.updater").rollback() end, { desc = "Rollback XXXNvim" })
-cmd("ZXUpdate", function() require("xj.core.utils.updater").update() end, { desc = "Update XXXNvim" })
-cmd("ZXVersion", function() require("xj.core.utils.updater").version() end, { desc = "Check XXXNvim Version" })
-cmd("ZXReload", function() require("xj.core.utils").reload() end, { desc = "Reload XXXNvim (Experimental)" })
+cmd("XXXRollback", function() require("xj.core.utils.updater").rollback() end, { desc = "Rollback XXXNvim" })
+cmd("XXXUpdate", function() require("xj.core.utils.updater").update() end, { desc = "Update XXXNvim" })
+cmd("XXXVersion", function() require("xj.core.utils.updater").version() end, { desc = "Check XXXNvim Version" })
+cmd("XXXReload", function() require("xj.core.utils").reload() end, { desc = "Reload XXXNvim (Experimental)" })

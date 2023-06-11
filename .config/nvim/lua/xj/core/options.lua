@@ -51,7 +51,8 @@ local options = xj.user_opts("options", {
   },
   g = {
     mapleader = " ", -- set leader key
-    maplocalleader = "\\", -- set leader key
+    maplocalleader = "\\", -- set default local leader key
+    -- XXXNvim specific global options
     autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
     autopairs_enabled = true, -- enable autopairs at start
     cmp_enabled = true, -- enable completion at start
