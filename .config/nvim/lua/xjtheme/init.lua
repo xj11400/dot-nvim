@@ -18,7 +18,6 @@ function M.load(theme)
     "base",
     "syntax",
     "lsp",
-    "heirline",
   })
 
   highlights = util.get_hl_modules(highlights, "xjtheme.groups.plugins", M.config.plugins)
