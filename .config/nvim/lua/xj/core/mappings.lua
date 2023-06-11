@@ -51,7 +51,6 @@ maps.v["<leader>p"] = { "\"+p", desc = "+Paste" }
 maps.v["p"] = { "p:let @\"=@0<CR>", desc = "Paste" }
 maps.v["*"] = { "y/<C-R>\"<CR>", desc = "Visual search *" }
 maps.v["#"] = { "y?<C-R>\"<CR>", desc = "Visual search #" }
-maps.n["<C-n>"] = { ":noh<CR>", desc = "No heighlight" }
 
 -- file
 maps.n["<localleader>w"] = { "<cmd>w<cr>", desc = get_icon("Save", 1, true) .. "Save" }
