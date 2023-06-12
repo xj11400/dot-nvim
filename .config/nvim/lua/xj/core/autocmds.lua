@@ -7,12 +7,25 @@ local utils = require "xj.core.utils"
 local is_available = utils.is_available
 local zxevent = utils.event
 
--- vim.on_key(function(char)
---   if vim.fn.mode() == "n" then
---     local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
---     if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
---   end
--- end, namespace "auto_hlsearch")
+vim.on_key(function(char)
+  if vim.fn.mode() == "n" then
+    local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
+    if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
+  end
+end, namespace "auto_hlsearch")
+
+-- auto-reload files when modified externally
+-- https://unix.stackexchange.com/a/383044
+-- https://neovim.discourse.group/t/a-lua-based-auto-refresh-buffers-when-they-change-on-disk-function/2482/5
+-- vim.o.autoread = true
+autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  pattern = { "*" },
+  callback = function ()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd.checktime()
+    end
+  end
+})
 
 local bufferline_group = augroup("bufferline", { clear = true })
 autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, {

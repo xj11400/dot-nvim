@@ -6,6 +6,7 @@ if vim.fn.has "nvim-0.9" == 1 then
 end
 local options = xj.user_opts("options", {
   opt = {
+    autoread = true, -- Auto read
     breakindent = true, -- Wrap indent to match  line start
     -- clipboard = "unnamedplus", -- Connection to the system clipboard
     cmdheight = 0, -- hide command line unless needed
