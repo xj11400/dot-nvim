@@ -1,6 +1,21 @@
--- logger --
--- _logger = require('xj.utility.logger_file')
--- _logger:init()
--- _logger:info('------ start ------')
+for _, source in ipairs {
+  "xj.core.bootstrap",
+  "xj.config.options",
+  "xj.core.lazy",
+  "xj.config.autocmds",
+  "xj.config.mappings",
+} do
+  local status_ok, fault = pcall(require, source)
+  if not status_ok then vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault) end
+end
 
-require('xj.core')
+if xj.default_colorscheme then
+  if not pcall(vim.cmd.colorscheme, xj.default_colorscheme) then
+    require("xj.core.utils").notify(
+      "Error setting up colorscheme: " .. xj.default_colorscheme,
+      vim.log.levels.ERROR
+    )
+  end
+end
+
+require("xj.core.utils").conditional_func(xj.user_opts("polish", nil, false), true)
