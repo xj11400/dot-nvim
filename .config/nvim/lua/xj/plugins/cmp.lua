@@ -100,7 +100,7 @@ return {
           ["<C-y>"] = cmp.config.disable,
           -- close
           ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-          ["["] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
+          ["<C-l>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
           -- confirm
           ["<CR>"] = cmp.mapping.confirm { select = false },
           ["<C-j>"] = cmp.mapping.confirm { select = false },
