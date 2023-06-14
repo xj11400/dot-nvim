@@ -225,6 +225,7 @@ end
 -- NeoTree
 if is_available "neo-tree.nvim" then
   maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+  maps.n["<leader>ee"] = { "<cmd>Neotree position=current dir=%:p:h:h reveal_file=%:p<cr>", desc = "Toggle Explorer Current" }
   maps.n["<leader>o"] = {
     function()
       if vim.bo.filetype == "neo-tree" then
@@ -367,6 +368,9 @@ if is_available "toggleterm.nvim" then
     maps.n["<leader>gg"] = { function() utils.toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
     maps.n["<leader>tl"] = { function() utils.toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
   end
+  if vim.fn.executable "ranger" == 1 then
+    maps.n["<leader>tr"] = { function() utils.toggle_term_cmd "ranger" end, desc = "ToggleTerm ranger" }
+  end
   if vim.fn.executable "node" == 1 then
     maps.n["<leader>tn"] = { function() utils.toggle_term_cmd "node" end, desc = "ToggleTerm node" }
   end
@@ -388,12 +392,6 @@ if is_available "toggleterm.nvim" then
   -- maps.t["<F7>"] = maps.n["<F7>"]
   -- maps.n["<C-'>"] = maps.n["<F7>"] -- requires terminal that supports binding <C-'>
   -- maps.t["<C-'>"] = maps.n["<F7>"] -- requires terminal that supports binding <C-'>
-end
-
-if is_available "vim-floaterm" then
-  if vim.fn.executable "ranger" == 1 then
-    maps.n["<leader>tr"] = {'<cmd>FloatermNew ranger<cr>', desc = 'Floaterm Ranger'}
-  end
 end
 
 if is_available "nvim-dap" then
