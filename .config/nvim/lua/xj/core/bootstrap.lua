@@ -127,6 +127,6 @@ if options.pin_plugins == nil then options.pin_plugins = options.channel == "sta
 --- table of user created terminals
 xj.user_terminals = {}
 --- table of language servers to ignore the setup of, configured through lsp.skip_setup in the user configuration
-xj.lsp = { skip_setup = xj.user_opts("lsp.skip_setup", {}) }
+xj.lsp = { skip_setup = xj.user_opts("lsp.skip_setup", {}), progress = {} }
 --- the default colorscheme to apply on startup
 xj.default_colorscheme = xj.user_opts("colorscheme", "xjtheme", false)

@@ -39,7 +39,7 @@ return {
   GitStaged = "✓",
   GitUnstaged = "✗",
   GitUntracked = "★",
-  LSPLoaded = "",
+  LSPLoaded = "", -- TODO: Remove unused icon in XXXNvim v4
   LSPLoading1 = "",
   LSPLoading2 = "󰀚",
   LSPLoading3 = "",
