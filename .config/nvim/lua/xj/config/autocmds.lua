@@ -271,7 +271,7 @@ cmd(
   { desc = "Check XXXNvim Changelog" }
 )
 cmd(
-  "XXXUpdatePackages",
+  "UpdatePackages",
   function() require("xj.core.utils.updater").update_packages() end,
   { desc = "Update Plugins and Mason" }
 )

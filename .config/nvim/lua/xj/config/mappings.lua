@@ -27,7 +27,7 @@ local localsections = {
 -- Standard Operations
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
-maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
+-- maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
 
 -- move
 maps.n["J"] = { ":m .+1<CR>==", desc = "Move line down" }
@@ -93,12 +93,12 @@ maps.n["<localleader>ps"] = { function() require("lazy").home() end, desc = "Plu
 maps.n["<localleader>pS"] = { function() require("lazy").sync() end, desc = "Plugins Sync" }
 maps.n["<localleader>pu"] = { function() require("lazy").check() end, desc = "Plugins Check Updates" }
 maps.n["<localleader>pU"] = { function() require("lazy").update() end, desc = "Plugins Update" }
+maps.n["<localleader>pa"] = { "<cmd>UpdatePackages<cr>", desc = "Update Plugins and Mason Packages" }
 
 -- XXXNvim
-maps.n["<localleader>pa"] = { "<cmd>ZXUpdatePackages<cr>", desc = "Update Plugins and Mason Packages" }
-maps.n["<localleader>pA"] = { "<cmd>ZXUpdate<cr>", desc = "XXXNvim Update" }
-maps.n["<localleader>pv"] = { "<cmd>ZXVersion<cr>", desc = "XXXNvim Version" }
-maps.n["<localleader>pl"] = { "<cmd>ZXChangelog<cr>", desc = "XXXNvim Changelog" }
+-- maps.n["<localleader>pA"] = { "<cmd>XXXUpdate<cr>", desc = "XXXNvim Update" }
+-- maps.n["<localleader>pv"] = { "<cmd>XXXVersion<cr>", desc = "XXXNvim Version" }
+-- maps.n["<localleader>pl"] = { "<cmd>XXXChangelog<cr>", desc = "XXXNvim Changelog" }
 
 -- Manage Buffers
 maps.n["<leader>c"] = { function() require("xj.core.utils.buffer").close() end, desc = "Close buffer" }
