@@ -17,7 +17,7 @@ local sections = {
 
 local localsections = {
   package = { desc = get_icon("Package", 1, true) .. "Packages" },
-  ui = { desc = get_icon("Window", 1, true) .. "UI" },
+  ui = { desc = get_icon("Window", 1, true) .. "UI/UX" },
   session = { desc = get_icon("Session", 1, true) .. "Session" },
   toggle = { desc = get_icon("Toggle", 1, true) .. "Toggle" },
 
