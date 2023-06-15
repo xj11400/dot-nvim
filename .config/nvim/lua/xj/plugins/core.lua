@@ -1,7 +1,6 @@
 return {
   "nvim-lua/plenary.nvim",
   { "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
-  { "max397574/better-escape.nvim", event = "InsertCharPre", opts = { timeout = 300 } },
   { "NMAC427/guess-indent.nvim", event = "User ZXFile", config = require "xj.plugins.configs.guess-indent" },
   { -- TODO: REMOVE neovim-session-manager with XXXNvim v4
     "Shatur/neovim-session-manager",
