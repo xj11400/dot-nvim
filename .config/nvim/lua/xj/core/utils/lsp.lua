@@ -353,7 +353,7 @@ M.on_attach = function(client, bufnr)
     end
   end
 
-  if is_available("trouble.nvim") then
+  if is_available "trouble.nvim" then
     lsp_mappings.n["<leader>x"] = { desc = (vim.g.icons_enabled and " " or "") .. "Trouble" }
   end
 
