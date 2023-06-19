@@ -243,11 +243,11 @@ M.on_attach = function(client, bufnr)
           end
         end,
       })
-      lsp_mappings.n["<leader>uf"] = {
+      lsp_mappings.n["<localleader>uf"] = {
         function() require("xj.core.utils.ui").toggle_buffer_autoformat() end,
         desc = "Toggle autoformatting (buffer)",
       }
-      lsp_mappings.n["<leader>uF"] = {
+      lsp_mappings.n["<localleader>uF"] = {
         function() require("xj.core.utils.ui").toggle_autoformat() end,
         desc = "Toggle autoformatting (global)",
       }
@@ -326,7 +326,7 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.supports_method "textDocument/semanticTokens" and vim.lsp.semantic_tokens then
-    lsp_mappings.n["<leader>uY"] = {
+    lsp_mappings.n["<localleader>uY"] = {
       function() require("xj.core.utils.ui").toggle_buffer_semantic_tokens(bufnr) end,
       desc = "Toggle LSP semantic highlight (buffer)",
     }
@@ -351,6 +351,10 @@ M.on_attach = function(client, bufnr)
         end)
       end
     end
+  end
+
+  if is_available("trouble.nvim") then
+    lsp_mappings.n["<leader>x"] = { desc = (vim.g.icons_enabled and " " or "") .. "Trouble" }
   end
 
   if not vim.tbl_isempty(lsp_mappings.v) then

@@ -36,6 +36,9 @@ require("lazy").setup(xj.user_opts("lazy", {
   spec = spec,
   defaults = { lazy = true },
   install = { colorscheme = colorscheme },
+  change_detection = {
+    notify = false, -- get a notification when changes are found
+  },
   performance = {
     rtp = {
       paths = xj.supported_configs,
