@@ -111,6 +111,7 @@ return {
         h = "parent_or_close",
         l = "child_or_open",
         Y = "copy_selector",
+        ["P"] = { "toggle_preview", config = { use_float = false } },
       },
     },
     filesystem = {

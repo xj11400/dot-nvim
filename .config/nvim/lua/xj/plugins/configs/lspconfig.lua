@@ -19,6 +19,12 @@ return function(_, _)
   end
   lsp.setup_diagnostics(signs)
 
+  -- config diagnostics
+  vim.diagnostic.config {
+    virtual_text = false,
+    underline = true,
+  }
+
   local orig_handler = vim.lsp.handlers["$/progress"]
   vim.lsp.handlers["$/progress"] = function(_, msg, info)
     local progress, id = xj.lsp.progress, ("%s.%s"):format(info.client_id, msg.token)
