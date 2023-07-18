@@ -1,5 +1,6 @@
 return {
   "nvim-lua/plenary.nvim",
+  "echasnovski/mini.bufremove",
   { "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
   { "NMAC427/guess-indent.nvim", event = "User ZXFile", config = require "xj.plugins.configs.guess-indent" },
   { -- TODO: REMOVE neovim-session-manager with XXXNvim v4
@@ -12,12 +13,16 @@ return {
     "stevearc/resession.nvim",
     enabled = vim.g.resession_enabled == true,
     opts = {
-      buf_filter = function(bufnr) return require("xj.core.utils.buffer").is_valid(bufnr) end,
+      buf_filter = function(bufnr) return require("xj.core.utils.buffer").is_restorable(bufnr) end,
       tab_buf_filter = function(tabpage, bufnr) return vim.tbl_contains(vim.t[tabpage].bufs, bufnr) end,
       extensions = { xj = {} },
     },
   },
-  { "s1n7ax/nvim-window-picker", opts = { use_winbar = "smart" } },
+  {
+    "s1n7ax/nvim-window-picker",
+    name = "window-picker",
+    opts = { picker_config = { statusline_winbar_picker = { use_winbar = "smart" } } },
+  },
   {
     "mrjones2014/smart-splits.nvim",
     opts = {

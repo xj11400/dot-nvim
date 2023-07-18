@@ -4,7 +4,7 @@ return {
   {
     "echasnovski/mini.surround",
     keys = {
-      { prefix, mode={"x","n"},desc = "Surround" },
+      { prefix, mode = { "x", "n" }, desc = "Surround" },
     },
     opts = {
       mappings = {

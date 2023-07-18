@@ -1,9 +1,10 @@
+-- TODO: replace <leader> to <Leader> everywhere in XXXNvim v4 to match vimdoc
 local utils = require "xj.core.utils"
 local get_icon = utils.get_icon
 local is_available = utils.is_available
 local ui = require "xj.core.utils.ui"
 
-local maps = { i = {}, n = {}, v = {}, t = {}, c = {} }
+local maps = require("xj.core.utils").empty_map_table()
 
 local sections = {
   f = { desc = get_icon("Search", 1, true) .. "Find" },
@@ -27,13 +28,14 @@ local localsections = {
 -- Standard Operations
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
--- maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
+-- TODO: Remove when dropping support for <Neovim v0.10
+if not vim.ui.open then maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" } end
 
 -- move
-maps.n["J"] = { ":m .+1<CR>==", desc = "Move line down" }
-maps.n["K"] = { ":m .-2<CR>==", desc = "Move line up" }
-maps.v["J"] = { ":m '>+1<CR>gv=gv", desc = "Move line down" }
-maps.v["K"] = { ":m '<-2<CR>gv=gv", desc = "Move line up" }
+maps.n["<C-J>"] = { ":m .+1<CR>==", desc = "Move line down" }
+maps.n["<C-K>"] = { ":m .-2<CR>==", desc = "Move line up" }
+maps.v["<C-J>"] = { ":m '>+1<CR>gv=gv", desc = "Move line down" }
+maps.v["<C-K>"] = { ":m '<-2<CR>gv=gv", desc = "Move line up" }
 maps.i["<C-S-J>"] = { "<Esc>:m .+1<CR>==gi", desc = "Move line down" }
 maps.i["<C-S-K>"] = { "<Esc>:m .-2<CR>==gi", desc = "Move line up" }
 
@@ -144,7 +146,8 @@ maps.n["<leader>bD"] = {
   desc = "Pick to close",
 }
 maps.n["<leader>bl"] =
-{ function() require("xj.core.utils.buffer").close_left() end, desc = "Close all buffers to the left" }
+  { function() require("xj.core.utils.buffer").close_left() end, desc = "Close all buffers to the left" }
+maps.n["<leader>bp"] = { function() require("xj.core.utils.buffer").prev() end, desc = "Previous buffer" }
 maps.n["<leader>br"] =
 { function() require("xj.core.utils.buffer").close_right() end, desc = "Close all buffers to the right" }
 maps.n["<leader>bs"] = sections.bs
@@ -224,7 +227,7 @@ end
 
 -- NeoTree
 if is_available "neo-tree.nvim" then
-  maps.n["<leader>o"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+  maps.n["<leader>E"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
   maps.n["<leader>ee"] = { "<cmd>Neotree position=current dir=%:p:h:h reveal_file=%:p<cr>", desc = "Toggle Explorer Current" }
   maps.n["<leader>e"] = {
     function()
@@ -291,14 +294,45 @@ end
 if is_available "telescope.nvim" then
   maps.n["<leader>f"] = sections.f
   maps.n["<leader>g"] = sections.g
-  maps.n["<leader>gb"] = { function() require("telescope.builtin").git_branches() end, desc = "Git branches" }
-  maps.n["<leader>gc"] = { function() require("telescope.builtin").git_commits() end, desc = "Git commits" }
-  maps.n["<leader>gt"] = { function() require("telescope.builtin").git_status() end, desc = "Git status" }
+  maps.n["<leader>gb"] =
+    { function() require("telescope.builtin").git_branches { use_file_path = true } end, desc = "Git branches" }
+  maps.n["<leader>gc"] = {
+    function() require("telescope.builtin").git_commits { use_file_path = true } end,
+    desc = "Git commits (repository)",
+  }
+  maps.n["<leader>gC"] = {
+    function() require("telescope.builtin").git_bcommits { use_file_path = true } end,
+    desc = "Git commits (current file)",
+  }
+  maps.n["<leader>gt"] =
+    { function() require("telescope.builtin").git_status { use_file_path = true } end, desc = "Git status" }
   maps.n["<leader>f<CR>"] = { function() require("telescope.builtin").resume() end, desc = "Resume previous search" }
   maps.n["<leader>f'"] = { function() require("telescope.builtin").marks() end, desc = "Find marks" }
+  maps.n["<leader>f/"] =
+    { function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Find words in current buffer" }
+  maps.n["<leader>fa"] = {
+    function()
+      local cwd = vim.fn.stdpath "config" .. "/.."
+      local search_dirs = {}
+      for _, dir in ipairs(xj.supported_configs) do                             -- search all supported config locations
+        if dir == xj.install.home then dir = dir .. "/lua/user" end             -- don't search the xj core files
+        if vim.fn.isdirectory(dir) == 1 then table.insert(search_dirs, dir) end -- add directory to search if exists
+      end
+      if vim.tbl_isempty(search_dirs) then                                      -- if no config folders found, show warning
+        utils.notify("No user configuration files found", vim.log.levels.WARN)
+      else
+        if #search_dirs == 1 then cwd = search_dirs[1] end -- if only one directory, focus cwd
+        require("telescope.builtin").find_files {
+          prompt_title = "Config Files",
+          search_dirs = search_dirs,
+          cwd = cwd,
+        } -- call telescope
+      end
+    end,
+    desc = "Find XXXNvim config files",
+  }
   maps.n["<leader>fb"] = { function() require("telescope.builtin").buffers() end, desc = "Find buffers" }
-  maps.n["<leader>fc"] =
-  { function() require("telescope.builtin").grep_string() end, desc = "Find for word under cursor" }
+  maps.n["<leader>fc"] = { function() require("telescope.builtin").grep_string() end, desc = "Find word under cursor" }
   maps.n["<leader>fC"] = { function() require("telescope.builtin").commands() end, desc = "Find commands" }
   maps.n["<leader>ff"] = { function() require("telescope.builtin").find_files() end, desc = "Find files" }
   maps.n["<leader>fF"] = {
@@ -344,8 +378,15 @@ if is_available "toggleterm.nvim" then
   maps.n["<leader>t"] = sections.t
   if vim.fn.executable "lazygit" == 1 then
     maps.n["<leader>g"] = sections.g
-    maps.n["<leader>gg"] = { function() utils.toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
-    maps.n["<leader>tl"] = { function() utils.toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
+    maps.n["<leader>gg"] = {
+      function()
+        local worktree = require("xj.core.utils.git").file_worktree()
+        local flags = worktree and (" --work-tree=%s --git-dir=%s"):format(worktree.toplevel, worktree.gitdir) or ""
+        utils.toggle_term_cmd("lazygit " .. flags)
+      end,
+      desc = "ToggleTerm lazygit",
+    }
+    maps.n["<leader>tl"] = maps.n["<leader>gg"]
   end
   if vim.fn.executable "ranger" == 1 then
     maps.n["<leader>tr"] = { function() utils.toggle_term_cmd "ranger" end, desc = "ToggleTerm ranger" }
@@ -380,7 +421,7 @@ if is_available "nvim-dap" then
   -- run `nvim -V3log +quit` and search through the "Terminal info" in the `log` file for the correct keyname
   maps.n["<F5>"] = { function() require("dap").continue() end, desc = "Debugger: Start" }
   maps.n["<F17>"] = { function() require("dap").terminate() end, desc = "Debugger: Stop" } -- Shift+F5
-  maps.n["<F21>"] = {
+  maps.n["<F21>"] = { -- Shift+F9
     function()
       vim.ui.input({ prompt = "Condition: " }, function(condition)
         if condition then require("dap").set_breakpoint(condition) end
@@ -463,7 +504,7 @@ maps.n["<localleader>ui"] = { ui.set_indent, desc = "Change indent setting" }
 maps.n["<localleader>ul"] = { ui.toggle_statusline, desc = "Toggle statusline" }
 maps.n["<localleader>uL"] = { ui.toggle_codelens, desc = "Toggle CodeLens" }
 maps.n["<localleader>un"] = { ui.change_number, desc = "Change line numbering" }
-maps.n["<localleader>uN"] = { ui.toggle_ui_notifications, desc = "Toggle UI notifications" }
+maps.n["<localleader>uN"] = { ui.toggle_ui_notifications, desc = "Toggle Notifications" }
 maps.n["<localleader>up"] = { ui.toggle_paste, desc = "Toggle paste mode" }
 maps.n["<localleader>us"] = { ui.toggle_spell, desc = "Toggle spellcheck" }
 maps.n["<localleader>uS"] = { ui.toggle_conceal, desc = "Toggle conceal" }
@@ -484,58 +525,59 @@ maps.n["<localleader>x"] = localsections.xj
 maps.n["<localleader>xr"] = { "<cmd>XXXReload<cr>", desc = "Reload" }
 
 if is_available "oil.nvim" and vim.fn.executable "ranger" == 1 then
-  maps.n["<localleader>xe"] = { 
+  maps.n["<localleader>xe"] = {
     function()
       local dir = xj.install.home .. "/lua"
       -- utils.toggle_term_cmd ("ranger " .. dir)
       require("oil").open_float(dir)
     end,
-    desc = "Explore Config" }
+    desc = "Explore Config",
+  }
 end
 
 if is_available "telescope.nvim" then
-maps.n["<localleader>xu"] = {
-  function()
-    local cwd = vim.fn.stdpath "config" .. "/.."
-    local search_dirs = {}
-    for _, dir in ipairs(xj.supported_configs) do                             -- search all supported config locations
-      if dir == xj.install.home then dir = dir .. "/lua/user" end             -- don't search the xj core files
-      if vim.fn.isdirectory(dir) == 1 then table.insert(search_dirs, dir) end -- add directory to search if exists
-    end
-    if vim.tbl_isempty(search_dirs) then                                      -- if no config folders found, show warning
-      utils.notify("No user configuration files found", vim.log.levels.WARN)
-    else
-      if #search_dirs == 1 then cwd = search_dirs[1] end -- if only one directory, focus cwd
-      require("telescope.builtin").find_files {
-        prompt_title = "Config Files",
-        search_dirs = search_dirs,
-        cwd = cwd,
-      } -- call telescope
-    end
-  end,
-  desc = "Find user config files",
-}
-maps.n["<localleader>xc"] = {
-  function()
-    local cwd = vim.fn.stdpath "config" .. "/.."
-    local search_dirs = {}
-    for _, dir in ipairs(xj.supported_configs) do                             -- search all supported config locations
-      if dir == xj.install.home then dir = dir .. "/lua/xj" end             -- don't search the xj core files
-      if vim.fn.isdirectory(dir) == 1 then table.insert(search_dirs, dir) end -- add directory to search if exists
-    end
-    if vim.tbl_isempty(search_dirs) then                                      -- if no config folders found, show warning
-      utils.notify("No user configuration files found", vim.log.levels.WARN)
-    else
-      if #search_dirs == 1 then cwd = search_dirs[1] end -- if only one directory, focus cwd
-      require("telescope.builtin").find_files {
-        prompt_title = "Config Files",
-        search_dirs = search_dirs,
-        cwd = cwd,
-      } -- call telescope
-    end
-  end,
-  desc = "Find xj config files",
-}
+  maps.n["<localleader>xu"] = {
+    function()
+      local cwd = vim.fn.stdpath "config" .. "/.."
+      local search_dirs = {}
+      for _, dir in ipairs(xj.supported_configs) do -- search all supported config locations
+        if dir == xj.install.home then dir = dir .. "/lua/user" end -- don't search the xj core files
+        if vim.fn.isdirectory(dir) == 1 then table.insert(search_dirs, dir) end -- add directory to search if exists
+      end
+      if vim.tbl_isempty(search_dirs) then -- if no config folders found, show warning
+        utils.notify("No user configuration files found", vim.log.levels.WARN)
+      else
+        if #search_dirs == 1 then cwd = search_dirs[1] end -- if only one directory, focus cwd
+        require("telescope.builtin").find_files {
+          prompt_title = "Config Files",
+          search_dirs = search_dirs,
+          cwd = cwd,
+        } -- call telescope
+      end
+    end,
+    desc = "Find user config files",
+  }
+  maps.n["<localleader>xc"] = {
+    function()
+      local cwd = vim.fn.stdpath "config" .. "/.."
+      local search_dirs = {}
+      for _, dir in ipairs(xj.supported_configs) do -- search all supported config locations
+        if dir == xj.install.home then dir = dir .. "/lua/xj" end -- don't search the xj core files
+        if vim.fn.isdirectory(dir) == 1 then table.insert(search_dirs, dir) end -- add directory to search if exists
+      end
+      if vim.tbl_isempty(search_dirs) then -- if no config folders found, show warning
+        utils.notify("No user configuration files found", vim.log.levels.WARN)
+      else
+        if #search_dirs == 1 then cwd = search_dirs[1] end -- if only one directory, focus cwd
+        require("telescope.builtin").find_files {
+          prompt_title = "Config Files",
+          search_dirs = search_dirs,
+          cwd = cwd,
+        } -- call telescope
+      end
+    end,
+    desc = "Find xj config files",
+  }
 end
 
 utils.set_mappings(xj.user_opts("mappings", maps))

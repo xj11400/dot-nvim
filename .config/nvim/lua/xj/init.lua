@@ -1,3 +1,5 @@
+if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then vim.loader.enable() end
+
 for _, source in ipairs {
   "xj.core.bootstrap",
   "xj.config.options",
@@ -12,7 +14,7 @@ end
 if xj.default_colorscheme then
   if not pcall(vim.cmd.colorscheme, xj.default_colorscheme) then
     require("xj.core.utils").notify(
-      "Error setting up colorscheme: " .. xj.default_colorscheme,
+      ("Error setting up colorscheme: `%s`"):format(xj.default_colorscheme),
       vim.log.levels.ERROR
     )
   end

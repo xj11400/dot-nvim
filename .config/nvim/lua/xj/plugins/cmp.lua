@@ -1,7 +1,7 @@
 return {
   {
     "L3MON4D3/LuaSnip",
-    build = vim.fn.has "win32" ~= 0
+    build = vim.fn.has "win32" == 0
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
       or nil,
     dependencies = { "rafamadriz/friendly-snippets" },
@@ -26,7 +26,7 @@ return {
       if not snip_status_ok then return end
       local border_opts = {
         border = "single",
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+        winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
       }
 
       local function has_words_before()

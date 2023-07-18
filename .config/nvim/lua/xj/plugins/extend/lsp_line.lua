@@ -21,5 +21,5 @@ return {
     -- mapping
     vim.keymap.set("", "<localleader>tl", require("lsp_lines").toggle, { desc = "Toggle LSP Lines" })
   end,
-  -- event = "User ZXFile",
+  event = "LspAttach"
 }
