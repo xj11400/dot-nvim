@@ -1,5 +1,6 @@
 local function callback()
   return {
+    AerialNormal = { fg = C.ui.text },
     AerialArrayIcon = { link = "@constant" },
     AerialBooleanIcon = { link = "@boolean" },
     AerialClassIcon = { link = "@type" },
@@ -11,10 +12,10 @@ local function callback()
     AerialFieldIcon = { link = "@field" },
     AerialFileIcon = { link = "@text.uri" },
     AerialFunctionIcon = { link = "@function" },
-    AerialGuide = { fg = C.subtext0 },
+    AerialGuide = { fg = C.ui.none_text },
     AerialInterfaceIcon = { link = "@type" },
     AerialKeyIcon = { link = "@type" },
-    AerialLine = { fg = C.yellow, bg = C.none },
+    AerialLine = { fg = C.ui.accent, bg = C.none },
     AerialMethodIcon = { link = "@method" },
     AerialModuleIcon = { link = "@namespace" },
     AerialNamespaceIcon = { link = "@namespace" },

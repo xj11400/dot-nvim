@@ -1,17 +1,18 @@
 local function callback()
   return {
-    BufferLineBufferVisible = { fg = C.text, bg = C.base },
-    BufferLineBufferSelected = { fg = C.surface2, bg = C.base, bold = true },
-    BufferLineTab = { fg = C.surface0, bg = C.base },
-    BufferLineTabSelected = { fg = C.text, bg = C.base },
-    BufferLineTabClose = { fg = C.red, bg = C.base },
-    BufferLineIndicatorSelected = { fg = C.base, bg = C.base },
-    BufferLineCloseButtonVisible = { fg = C.surface0, bg = C.base },
-    BufferLineCloseButtonSelected = { fg = C.red, bg = C.base },
-    BufferLineModifiedVisible = { fg = C.text, bg = C.base },
-    BufferLineModifiedSelected = { fg = C.green, bg = C.base },
-    BufferLineError = { fg = C.dark_red, bg = C.dark_red },
-    BufferLineErrorDiagnostic = { fg = C.dark_red, bg = C.dark_red },
+    BufferLineBufferVisible = { fg = C.ui.text_inactive, bg = C.ui.base },
+    BufferLineBufferSelected = { fg = C.ui.text_active, bg = C.ui.base, bold = true },
+    BufferLineTab = { fg = C.ui.text_inactve, bg = C.ui.tabline },
+    BufferLineTabSelected = { fg = C.ui.text, bg = C.ui.tabline },
+    BufferLineTabClose = { fg = C.ui.red, bg = C.ui.tabline },
+    BufferLineIndicatorSelected = { fg = C.ui.base, bg = C.ui.base },
+    BufferLineCloseButtonVisible = { fg = C.ui.red, bg = C.tableline },
+    BufferLineCloseButtonSelected = { fg = C.ui.red, bg = C.ui.tabline },
+    BufferLineModifiedVisible = { fg = C.ui.text, bg = C.ui.base },
+    BufferLineModifiedSelected = { fg = C.ui.green, bg = C.ui.base },
+    BufferLineModified = { fg = C.ui.green, bg = C.ui.tabline },
+    BufferLineError = { fg = C.ui.red, bg = C.ui.red },
+    BufferLineErrorDiagnostic = { fg = C.ui.red, bg = C.ui.red },
   }
 end
 
