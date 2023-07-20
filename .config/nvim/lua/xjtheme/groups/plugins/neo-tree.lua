@@ -28,8 +28,8 @@ local function callback(opts)
       bold = true,
     },
     NeoTreeTabInactive = { fg = C.ui.text_inactive, bg = C.ui.tabline },
-    NeoTreeTabSeparatorActive = { fg = C.ui.tool, bg = C.ui.tool },
-    NeoTreeTabSeparatorInactive = { fg = C.ui.tabline, bg = C.ui.tabline },
+    NeoTreeTabSeparatorActive = { fg = opts.transparent and C.ui.split or C.ui.tool, bg = C.ui.tool },
+    NeoTreeTabSeparatorInactive = { fg = opts.transparent and C.ui.split or C.ui.tabline, bg = C.ui.tabline },
     NeoTreeVertSplit = { fg = C.ui.split, bg = opts.transparent and C.none or C.ui.base },
     NeoTreeWinSeparator = { fg = C.ui.split, bg = opts.transparent and C.none or C.ui.base, bold = true },
   }

@@ -33,6 +33,18 @@ M.default = {
   },
   plugin_default = "auto",
   plugins = {},
+  transparent = {
+    list = {
+      'tabline',
+      'tool',
+      'base',
+      'inactive_base',
+      'statusline',
+      'popup',
+      'float',
+    },
+    cache = {},
+  },
 }
 
 function M.user_config(opts) return vim.tbl_deep_extend("force", M.default, opts or {}) end

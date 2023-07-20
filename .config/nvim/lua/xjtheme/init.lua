@@ -53,10 +53,26 @@ function M.setup(opts)
       end,
     })
   end
+
+  vim.api.nvim_create_user_command(
+    "ZXToggleTransparent",
+    function() M.toggle_transparent() end,
+    { desc = "ZX Theme Toggle Transparent" }
+  )
 end
 
 if vim.tbl_isempty(M.config) then
   M.setup()
+end
+
+function M.toggle_transparent(opt)
+  if opt == nil then
+    M.config.style.transparent = not M.config.style.transparent
+  else
+    M.config.style.transparent = opt
+  end
+
+  M.load()
 end
 
 return M

@@ -1,16 +1,19 @@
 local M = {}
 
 function M.overwrite_colors(opts)
-  if opts.style.transparent then C.base.bg = C.none end
+  local target_bg = nil
+  if opts.style.black_bg then target_bg = "#000000" end
+  if opts.style.transparent then target_bg = C.none end
 
   if opts.style.transparent or opts.style.black_bg then
-    C.ui.tabline = C.base.bg
-    C.ui.tool = C.base.bg
-    C.ui.base = C.base.bg
-    C.ui.inactive_base = C.base.bg
-    C.ui.statusline = C.base.bg
-    C.ui.popup = C.base.bg
-    C.ui.float = C.base.bg
+    for _, elem in pairs(opts.transparent.list) do
+      opts.transparent.cache[elem] = C.ui[elem]
+      C.ui[elem] = target_bg
+    end
+  elseif not vim.tbl_isempty(opts.transparent.cache) and not target_bg then
+    for _, elem in pairs(opts.transparent.list) do
+      C.ui[elem] = opts.transparent.cache[elem]
+    end
   end
 
   return C
