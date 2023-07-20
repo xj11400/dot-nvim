@@ -175,7 +175,7 @@ local function callback(opts)
     --------------------
     --- Highlights
     --------------------
-    CursorColumn = { fg = C.none, bg = C.ui.current_line },
+    CursorColumn = { fg = C.ui.text_inactive, bg = C.none },
     ColorColumn = { fg = C.none, bg = C.ui.current_line }, -- NOTE: Find better color
     CursorLine = { fg = C.none, bg = C.ui.current_line },
 

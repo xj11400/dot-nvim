@@ -18,6 +18,8 @@ function M.load(theme)
 
   C = util.set_palettes(M.config)
 
+  C = util.overwrite_colors(M.config)
+
   local highlights = {}
   highlights = util.get_hl_modules(highlights, "xjtheme.groups", {
     "base",

@@ -15,6 +15,7 @@ M.default = {
     title_invert = false,
     italic_comments = true,
     simple_syntax_colors = false,
+    black_bg = true,
   },
   background = {
     light = "light",

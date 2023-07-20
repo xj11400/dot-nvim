@@ -1,5 +1,21 @@
 local M = {}
 
+function M.overwrite_colors(opts)
+  if opts.style.transparent then C.base.bg = C.none end
+
+  if opts.style.transparent or opts.style.black_bg then
+    C.ui.tabline = C.base.bg
+    C.ui.tool = C.base.bg
+    C.ui.base = C.base.bg
+    C.ui.inactive_base = C.base.bg
+    C.ui.statusline = C.base.bg
+    C.ui.popup = C.base.bg
+    C.ui.float = C.base.bg
+  end
+
+  return C
+end
+
 function M.reload(opts, theme)
   if vim.g.colors_name then vim.cmd.highlight "clear" end
   if vim.fn.exists "syntax_on" then vim.cmd.syntax "reset" end
