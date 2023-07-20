@@ -4,7 +4,9 @@ return {
   opts = {
     modes = {
       char = {
-        jump_labels = true
+        -- enabled = false,
+        -- jump_labels = true,
+        -- multi_line = false,
       }
     }
   },
@@ -54,6 +56,26 @@ return {
       "F",
       mode = { "n", "o", "x" },
       desc = "Backward Find Char",
+    },
+    {
+      "t",
+      mode = { "n", "o", "x" },
+      desc = "Forward Jump Befor",
+    },
+    {
+      "T",
+      mode = { "n", "o", "x" },
+      desc = "Backward Jump Befor",
+    },
+    {
+      "?",
+      mode = { "n", "o", "x" },
+      desc = "Forward Search",
+    },
+    {
+      "/",
+      mode = { "n", "o", "x" },
+      desc = "Forward Search",
     },
   },
 }

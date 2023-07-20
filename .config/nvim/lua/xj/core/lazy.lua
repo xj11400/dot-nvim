@@ -35,8 +35,12 @@ for _, config_dir in ipairs(xj.supported_configs) do
   if vim.fn.isdirectory(config_dir .. "/lua/user/plugins") == 1 then user_plugins = { import = "user.plugins" } end
 end
 
--- local spec = xj.updater.options.pin_plugins and { { import = xj.updater.snapshot.module } } or {}
-local spec = {}
+local spec = xj.updater.options.pin_plugins and { { import = xj.updater.snapshot.module } } or {}
+
+if vim.fn.filereadable(xj.updater.snapshot.path) == 0 then
+  spec = {}
+end
+
 vim.list_extend(spec, { { import = "xj.plugins" }, user_plugins })
 
 local colorscheme = xj.default_colorscheme and { xj.default_colorscheme } or nil

@@ -519,6 +519,7 @@ maps.n["<localleader>t"] = localsections.toggle
 if is_available "auto-save.nvim" then
   maps.n["<localleader>ts"] = { "<cmd>ASToggle<cr>", desc = "Toggle AutoSave" }
 end
+maps.n["<localleader>tt"] = { "<cmd>ZXToggleTransparent<cr>", desc = "Toggle transparent" }
 
 -- XJ
 maps.n["<localleader>x"] = localsections.xj
