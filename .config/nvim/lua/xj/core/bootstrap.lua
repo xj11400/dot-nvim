@@ -129,4 +129,4 @@ xj.user_terminals = {}
 --- table of language servers to ignore the setup of, configured through lsp.skip_setup in the user configuration
 xj.lsp = { skip_setup = xj.user_opts("lsp.skip_setup", {}), progress = {} }
 --- the default colorscheme to apply on startup
-xj.default_colorscheme = xj.user_opts("colorscheme", "xjtheme", false)
+xj.default_colorscheme = xj.user_opts("colorscheme", "zx", false)
