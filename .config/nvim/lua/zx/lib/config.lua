@@ -6,7 +6,7 @@ M.default = {
   terminal_colors = true,
   dev = false,
   style = {
-    transparent = false,
+    transparent = true,
     inactive = true,
     float = true,
     popup = true,
@@ -15,7 +15,7 @@ M.default = {
     title_invert = false,
     italic_comments = true,
     simple_syntax_colors = false,
-    black_bg = false,
+    black_bg = true,
   },
   background = {
     light = "zxlight",
