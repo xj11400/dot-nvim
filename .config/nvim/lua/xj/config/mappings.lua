@@ -222,7 +222,16 @@ if is_available "gitsigns.nvim" then
   maps.n["<leader>gs"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage Git hunk" }
   maps.n["<leader>gS"] = { function() require("gitsigns").stage_buffer() end, desc = "Stage Git buffer" }
   maps.n["<leader>gu"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "Unstage Git hunk" }
-  maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
+  -- maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
+end
+
+-- DiffView
+if is_available "diffview.nvim" then
+  maps.n["<leader>gd"] = { desc = "Diffview" }
+  maps.n["<leader>gdo"] = { "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" }
+  maps.n["<leader>gdc"] = { "<cmd>DiffviewClose<cr>", desc = "Close Diffview" }
+  maps.n["<leader>gde"] = { "<cmd>DiffviewToggleFiles<cr>", desc = "Diffview ToggleFiles" }
+  maps.n["<leader>gdr"] = { "<cmd>DiffviewRefresh<cr>", desc = "Diffview Refresh" }
 end
 
 -- NeoTree
