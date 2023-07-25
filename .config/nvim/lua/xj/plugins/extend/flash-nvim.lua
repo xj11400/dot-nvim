@@ -3,12 +3,11 @@ return {
   vscode = true,
   opts = {
     modes = {
-      search = {
-        enabled = false,
-      },
       char = {
         -- enabled = false,
-        -- jump_labels = true,
+        jump_labels = true,
+        autohide = true,
+        highlight = { backdrop = false },
         -- multi_line = false,
       },
     },
@@ -70,15 +69,15 @@ return {
       mode = { "n", "o", "x" },
       desc = "Backward Jump Befor",
     },
-    -- {
-    --   "?",
-    --   mode = { "n", "o", "x" },
-    --   desc = "Forward Search",
-    -- },
-    -- {
-    --   "/",
-    --   mode = { "n", "o", "x" },
-    --   desc = "Forward Search",
-    -- },
+    {
+      "?",
+      mode = { "n", "o", "x" },
+      desc = "Forward Search",
+    },
+    {
+      "/",
+      mode = { "n", "o", "x" },
+      desc = "Forward Search",
+    },
   },
 }

@@ -130,6 +130,7 @@ end
 M.on_attach = function(client, bufnr)
   local lsp_mappings = require("xj.core.utils").empty_map_table()
 
+  lsp_mappings.n["<leader>lT"] = { desc = "Toggle" }
   lsp_mappings.n["<leader>ld"] = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" }
   lsp_mappings.n["[d"] = { function() vim.diagnostic.goto_prev() end, desc = "Previous diagnostic" }
   lsp_mappings.n["]d"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" }
@@ -228,11 +229,11 @@ M.on_attach = function(client, bufnr)
           end
         end,
       })
-      lsp_mappings.n["<localleader>uf"] = {
+      lsp_mappings.n["<leader>lTf"] = {
         function() require("xj.core.utils.ui").toggle_buffer_autoformat() end,
         desc = "Toggle autoformatting (buffer)",
       }
-      lsp_mappings.n["<localleader>uF"] = {
+      lsp_mappings.n["<leader>lTF"] = {
         function() require("xj.core.utils.ui").toggle_autoformat() end,
         desc = "Toggle autoformatting (global)",
       }
@@ -282,7 +283,7 @@ M.on_attach = function(client, bufnr)
     -- TODO: remove check after dropping support for Neovim v0.9
     if vim.lsp.inlay_hint then
       if vim.b.inlay_hints_enabled then vim.lsp.inlay_hint(bufnr, true) end
-      lsp_mappings.n["<localleader>uH"] = {
+      lsp_mappings.n["<leader>lTH"] = {
         function() require("xj.core.utils.ui").toggle_buffer_inlay_hints(bufnr) end,
         desc = "Toggle LSP inlay hints (buffer)",
       }
@@ -328,7 +329,7 @@ M.on_attach = function(client, bufnr)
   if client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens then
     if vim.g.semantic_tokens_enabled then
       vim.b[bufnr].semantic_tokens_enabled = true
-      lsp_mappings.n["<localleader>uY"] = {
+      lsp_mappings.n["<leader>lTY"] = {
         function() require("xj.core.utils.ui").toggle_buffer_semantic_tokens(bufnr) end,
         desc = "Toggle LSP semantic highlight (buffer)",
       }

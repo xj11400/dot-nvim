@@ -1,6 +1,6 @@
 return {
   "echasnovski/mini.animate",
-  event = "VeryLazy",
+  event = "User ZXFile",
   cond = not vim.g.neovide,
   -- enabled = false,
   opts = function()
