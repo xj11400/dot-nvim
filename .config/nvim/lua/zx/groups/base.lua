@@ -166,7 +166,7 @@ local function callback(opts)
     --- Search & Select
     --------------------
     Search = { fg = C.none, bg = C.ui.selection },
-    IncSearch = { fg = C.ui.base, bg = C.ui.purple },
+    IncSearch = { fg = C.ui.base, bg = C.ui.yellow },
     CurSearch = { link = "IncSearch" },
     MatchParen = { fg = C.none, bg = C.ui.highlight },
     Visual = { fg = C.none, bg = C.ui.selection },
