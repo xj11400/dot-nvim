@@ -282,7 +282,7 @@ M.on_attach = function(client, bufnr)
     -- TODO: remove check after dropping support for Neovim v0.9
     if vim.lsp.inlay_hint then
       if vim.b.inlay_hints_enabled then vim.lsp.inlay_hint(bufnr, true) end
-      lsp_mappings.n["<leader>uH"] = {
+      lsp_mappings.n["<localleader>uH"] = {
         function() require("xj.core.utils.ui").toggle_buffer_inlay_hints(bufnr) end,
         desc = "Toggle LSP inlay hints (buffer)",
       }
@@ -328,7 +328,7 @@ M.on_attach = function(client, bufnr)
   if client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens then
     if vim.g.semantic_tokens_enabled then
       vim.b[bufnr].semantic_tokens_enabled = true
-      lsp_mappings.n["<leader>uY"] = {
+      lsp_mappings.n["<localleader>uY"] = {
         function() require("xj.core.utils.ui").toggle_buffer_semantic_tokens(bufnr) end,
         desc = "Toggle LSP semantic highlight (buffer)",
       }
@@ -358,8 +358,19 @@ M.on_attach = function(client, bufnr)
     end
   end
 
+  if is_available "lsp_lines.nvim" then
+    lsp_mappings.n["<leader>lz"] = { require("lsp_lines").toggle, desc = "Toggle LSP Lines" }
+  end
+
   if is_available "trouble.nvim" then
     lsp_mappings.n["<leader>x"] = { desc = (vim.g.icons_enabled and " " or "") .. "Trouble" }
+    lsp_mappings.n["<leader>xw"] =
+      { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" }
+    lsp_mappings.n["<leader>xx"] =
+      { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" }
+    lsp_mappings.n["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" }
+    lsp_mappings.n["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" }
+    lsp_mappings.n["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", desc = "LSP Reference (Trouble)" }
   end
 
   if not vim.tbl_isempty(lsp_mappings.v) then

@@ -319,27 +319,27 @@ if is_available "telescope.nvim" then
   maps.n["<leader>f'"] = { function() require("telescope.builtin").marks() end, desc = "Find marks" }
   maps.n["<leader>f/"] =
     { function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Find words in current buffer" }
-  maps.n["<leader>fa"] = {
-    function()
-      local cwd = vim.fn.stdpath "config" .. "/.."
-      local search_dirs = {}
-      for _, dir in ipairs(xj.supported_configs) do                             -- search all supported config locations
-        if dir == xj.install.home then dir = dir .. "/lua/user" end             -- don't search the xj core files
-        if vim.fn.isdirectory(dir) == 1 then table.insert(search_dirs, dir) end -- add directory to search if exists
-      end
-      if vim.tbl_isempty(search_dirs) then                                      -- if no config folders found, show warning
-        utils.notify("No user configuration files found", vim.log.levels.WARN)
-      else
-        if #search_dirs == 1 then cwd = search_dirs[1] end -- if only one directory, focus cwd
-        require("telescope.builtin").find_files {
-          prompt_title = "Config Files",
-          search_dirs = search_dirs,
-          cwd = cwd,
-        } -- call telescope
-      end
-    end,
-    desc = "Find XXXNvim config files",
-  }
+  -- maps.n["<leader>fa"] = {
+  --   function()
+  --     local cwd = vim.fn.stdpath "config" .. "/.."
+  --     local search_dirs = {}
+  --     for _, dir in ipairs(xj.supported_configs) do                             -- search all supported config locations
+  --       if dir == xj.install.home then dir = dir .. "/lua/user" end             -- don't search the xj core files
+  --       if vim.fn.isdirectory(dir) == 1 then table.insert(search_dirs, dir) end -- add directory to search if exists
+  --     end
+  --     if vim.tbl_isempty(search_dirs) then                                      -- if no config folders found, show warning
+  --       utils.notify("No user configuration files found", vim.log.levels.WARN)
+  --     else
+  --       if #search_dirs == 1 then cwd = search_dirs[1] end -- if only one directory, focus cwd
+  --       require("telescope.builtin").find_files {
+  --         prompt_title = "Config Files",
+  --         search_dirs = search_dirs,
+  --         cwd = cwd,
+  --       } -- call telescope
+  --     end
+  --   end,
+  --   desc = "Find XXXNvim config files",
+  -- }
   maps.n["<leader>fb"] = { function() require("telescope.builtin").buffers() end, desc = "Find buffers" }
   maps.n["<leader>fc"] = { function() require("telescope.builtin").grep_string() end, desc = "Find word under cursor" }
   maps.n["<leader>fC"] = { function() require("telescope.builtin").commands() end, desc = "Find commands" }
@@ -507,6 +507,7 @@ if is_available "nvim-cmp" then maps.n["<localleader>uc"] = { ui.toggle_cmp, des
 if is_available "nvim-colorizer.lua" then
   maps.n["<localleader>uC"] = { "<cmd>ColorizerToggle<cr>", desc = "Toggle color highlight" }
 end
+if is_available "auto-save.nvim" then maps.n["<localleader>uA"] = { "<cmd>ASToggle<cr>", desc = "Toggle AutoSave" } end
 maps.n["<localleader>ud"] = { ui.toggle_diagnostics, desc = "Toggle diagnostics" }
 maps.n["<localleader>ug"] = { ui.toggle_signcolumn, desc = "Toggle signcolumn" }
 maps.n["<localleader>ui"] = { ui.set_indent, desc = "Change indent setting" }
@@ -520,15 +521,12 @@ maps.n["<localleader>uS"] = { ui.toggle_conceal, desc = "Toggle conceal" }
 maps.n["<localleader>ut"] = { ui.toggle_tabline, desc = "Toggle tabline" }
 maps.n["<localleader>uu"] = { ui.toggle_url_match, desc = "Toggle URL highlight" }
 maps.n["<localleader>uw"] = { ui.toggle_wrap, desc = "Toggle wrap" }
-maps.n["<localleader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlight" }
+maps.n["<localleader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlighting (buffer)" }
 maps.n["<localleader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
+maps.n["<localleader>uz"] = { "<cmd>ZXToggleTransparent<cr>", desc = "Toggle ZX transparent" }
 
 -- Toggle
 maps.n["<localleader>t"] = localsections.toggle
-if is_available "auto-save.nvim" then
-  maps.n["<localleader>ts"] = { "<cmd>ASToggle<cr>", desc = "Toggle AutoSave" }
-end
-maps.n["<localleader>tt"] = { "<cmd>ZXToggleTransparent<cr>", desc = "Toggle transparent" }
 
 -- XJ
 maps.n["<localleader>x"] = localsections.xj

@@ -1,8 +1,5 @@
 return {
   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-  keys = {
-    { "<localleader>tl", desc = "Toggle lsp line" },
-  },
   config = function()
     require("lsp_lines").setup()
 
@@ -18,8 +15,5 @@ return {
     -- hide in default
     require("lsp_lines").toggle()
 
-    -- mapping
-    vim.keymap.set("", "<localleader>tl", require("lsp_lines").toggle, { desc = "Toggle LSP Lines" })
   end,
-  event = "LspAttach"
 }

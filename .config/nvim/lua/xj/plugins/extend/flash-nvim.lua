@@ -3,12 +3,15 @@ return {
   vscode = true,
   opts = {
     modes = {
+      search = {
+        enabled = false,
+      },
       char = {
         -- enabled = false,
         -- jump_labels = true,
         -- multi_line = false,
-      }
-    }
+      },
+    },
   },
   keys = {
     {
@@ -38,12 +41,12 @@ return {
     {
       "gsl",
       mode = { "n", "o", "x" },
-      function() 
-        require("flash").jump({
+      function()
+        require("flash").jump {
           search = { mode = "search", max_length = 0 },
           label = { after = { 0, 0 } },
-          pattern = "^"
-        })
+          pattern = "^",
+        }
       end,
       desc = "Jump Line",
     },
@@ -67,15 +70,15 @@ return {
       mode = { "n", "o", "x" },
       desc = "Backward Jump Befor",
     },
-    {
-      "?",
-      mode = { "n", "o", "x" },
-      desc = "Forward Search",
-    },
-    {
-      "/",
-      mode = { "n", "o", "x" },
-      desc = "Forward Search",
-    },
+    -- {
+    --   "?",
+    --   mode = { "n", "o", "x" },
+    --   desc = "Forward Search",
+    -- },
+    -- {
+    --   "/",
+    --   mode = { "n", "o", "x" },
+    --   desc = "Forward Search",
+    -- },
   },
 }
