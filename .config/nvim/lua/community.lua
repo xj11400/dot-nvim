@@ -10,7 +10,6 @@ return {
 
   -- packs
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.python" },
 
   -- import/override with your plugins folder
@@ -21,13 +20,16 @@ return {
   { import = "astrocommunity.diagnostics.trouble-nvim" },
   { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.register.nvim-neoclip-lua" },
-  { import = "astrocommunity.note-taking.obsidian-nvim" },
-  { import = "astrocommunity.note-taking.neorg" },
   { import = "astrocommunity.terminal-integration.flatten-nvim" },
   { import = "astrocommunity.terminal-integration.toggleterm-manager-nvim" },
+  { import = "astrocommunity.indent.mini-indentscope" },
 
+  --
   -- { import = "astrocommunity." },
   { import = "astrocommunity.code-runner.overseer-nvim" },
   { import = "astrocommunity.lsp.lsp-lens-nvim" },
   -- { import = "astrocommunity.keybinding.hydra-nvim" },
+  --
+  -- { import = "astrocommunity.note-taking.obsidian-nvim" },
+  -- { import = "astrocommunity.note-taking.neorg" },
 }
