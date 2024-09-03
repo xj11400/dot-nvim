@@ -104,6 +104,9 @@ return {
             desc = "Vertical split buffer from tabline",
           },
 
+          -- neo-tree
+          ['<Leader>E'] = replace_key("n", "<Leader>o"),
+
           --
           -- mapping to Localleader
           --
