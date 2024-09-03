@@ -16,6 +16,6 @@ return {
   enabled = true,
   cmd = "Oil",
   keys = {
-    { "<Localleader>O", function() require("oil").open_float() end, desc = "Explore with Oil" },
+    { "<Leader>o", function() require("oil").open_float() end, desc = "Explore with Oil" },
   },
 }
