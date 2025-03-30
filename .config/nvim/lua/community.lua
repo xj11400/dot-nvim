@@ -11,6 +11,8 @@ return {
   -- packs
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.cmake" },
+  { import = "astrocommunity.pack.typescript" },
 
   -- import/override with your plugins folder
   { import = "astrocommunity.git.diffview-nvim" },
