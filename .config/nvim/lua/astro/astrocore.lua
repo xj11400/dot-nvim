@@ -45,9 +45,6 @@ return {
       -- vim options can be configured here
       options = {
         opt = { -- vim.opt.<key>
-          clipboard = "", -- don't use "unnamedplus"
-          cursorcolumn = true, -- Highlight the text line of the cursor column
-          signcolumn = "yes:2", -- Show both gitsign symbols and diagnostics symbols -- (auto:3)
         },
         g = { -- vim.g.<key>
           -- configure global vim variables (vim.g)
@@ -200,6 +197,9 @@ return {
 
     -- mappings
     opts.mappings = vim.tbl_deep_extend("force", opts.mappings, require "configs.mappings")
+
+    -- options
+    opts.options = vim.tbl_deep_extend("force", opts.options, require "configs.options")
 
     return opts
   end,
