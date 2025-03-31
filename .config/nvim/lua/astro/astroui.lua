@@ -65,5 +65,10 @@ return {
       LSPLoading9 = "⠇",
       LSPLoading10 = "⠏",
     },
+    lazygit = {
+      theme = {
+        activeBorderColor = { fg = _zx.ui.blue, bold = true },
+      },
+    }
   },
 }
