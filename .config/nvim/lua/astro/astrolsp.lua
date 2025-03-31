@@ -111,7 +111,7 @@ return {
     })
 
     -- function to change mappings
-    local chaange_mapping = function(map, mode, old_key, new_key)
+    local change_mapping = function(map, mode, old_key, new_key)
       local _map = map[mode]
       if _map and _map[old_key] then
         _map[new_key] = _map[old_key]
@@ -120,13 +120,13 @@ return {
     end
 
     -- move mappings from <Leader> to <Localleader>
-    chaange_mapping(opts.mappings, "n", "<Leader>uL", "<Localleader>uL")
-    chaange_mapping(opts.mappings, "n", "<Leader>uf", "<Localleader>uf")
-    chaange_mapping(opts.mappings, "n", "<Leader>uF", "<Localleader>uF")
-    chaange_mapping(opts.mappings, "n", "<Leader>uh", "<Localleader>uh")
-    chaange_mapping(opts.mappings, "n", "<Leader>uH", "<Localleader>uH")
-    chaange_mapping(opts.mappings, "n", "<Leader>uY", "<Localleader>uY")
-    chaange_mapping(opts.mappings, "n", "<Leader>u?", "<Localleader>u?")
+    change_mapping(opts.mappings, "n", "<Leader>uL", "<Localleader>uL")
+    change_mapping(opts.mappings, "n", "<Leader>uf", "<Localleader>uf")
+    change_mapping(opts.mappings, "n", "<Leader>uF", "<Localleader>uF")
+    change_mapping(opts.mappings, "n", "<Leader>uh", "<Localleader>uh")
+    change_mapping(opts.mappings, "n", "<Leader>uH", "<Localleader>uH")
+    change_mapping(opts.mappings, "n", "<Leader>uY", "<Localleader>uY")
+    change_mapping(opts.mappings, "n", "<Leader>u?", "<Localleader>u?")
 
     return opts
   end,
