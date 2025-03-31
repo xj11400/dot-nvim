@@ -12,7 +12,7 @@ return {
       -- },
     }
 
-    -- hide in default
-    require("lsp_lines").toggle()
+    -- Toggle on in default
+    -- require("lsp_lines").toggle()
   end,
 }
