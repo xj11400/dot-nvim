@@ -122,4 +122,13 @@ c.icon.zip = "#f9d71c"
 c.icon.md = "#519aba"
 c.icon.pkg = "#d39ede"
 
+--------------------------------
+--- set hl
+--------------------------------
+function c.set_hl(highlights)
+  for name, hl in pairs(highlights) do
+    vim.api.nvim_set_hl(0, name, hl)
+  end
+end
+
 return c
