@@ -147,6 +147,9 @@ return {
           ["<Localleader>uu"] = replace_key("n", "<Leader>uu"),
           ["<Localleader>uw"] = replace_key("n", "<Leader>uw"),
           ["<Localleader>uy"] = replace_key("n", "<Leader>uy"),
+          ["<Localleader>uv"] = replace_key("n", "<Leader>uv"),
+          ["<Localleader>uV"] = replace_key("n", "<Leader>uV"),
+          ["<Localleader>uZ"] = replace_key("n", "<Leader>uZ"),
 
           -- autopairs
           ["<Localleader>ua"] = replace_key("n", "<Leader>ua"),
