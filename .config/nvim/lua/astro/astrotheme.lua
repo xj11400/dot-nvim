@@ -28,6 +28,11 @@ return {
           { fg = opts.style.transparent and _zx.ui.split or _zx.ui.tabline, bg = _zx.ui.tabline }
         -- flash
         hl.FlashLabel = { fg = _zx.ui.base, bg = _zx.ui.blue, bold = true }
+        -- snack
+        hl.SnacksDashboardHeader = { fg = _zx.ui.text }
+        hl.SnacksDashboardFooter = { fg = _zx.ui.text }
+        hl.SnacksDashboardDesc = { fg = _zx.ui.text }
+        hl.SnacksDashboardKey = { fg = _zx.ui.text }
       end,
       -- ["@String"] = {fg = "", bg = "NONE"},
     }
