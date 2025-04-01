@@ -34,11 +34,106 @@ return {
   --   line_blank_line_above = false, -- insert a blank line above the line
   --   line_blank_line_below = false, -- insert a blank line below the line
   -- },
-  -- keys = {
-  --   {
-  --     "gcb",
-  --     mode = { "n", "v" },
-  --     desc = "Comment Box - Box",
-  --   },
-  -- },
+  keys = function()
+    local comment_box = function(bl)
+      local cb = vim.fn.input("CB[x][y]" .. bl .. "[n] (xyn/help:?): ")
+
+      -- help
+      if cb == '?' then
+        print(
+          "CB[x][y]".. bl .. "[n]:\n" ..
+          "position           : x (l, c, r)\n" ..
+          "text justification : y (l, c, r, a)\n" ..
+          "style              : n (number)\n" ..
+          "Choose predefined style from the catalog.")
+        return
+      end
+
+      -- verify
+      local x, y, style = cb:match("([lcr])([lcra])(.*)")
+
+      if x and y then
+          style = style ~= "" and tonumber(style) or nil
+      else
+          print("Invalid input")
+          return
+      end
+
+      -- command
+      vim.api.nvim_command("CB" .. x .. y .. bl .. style)
+    end
+
+    local comment_box_box = function()
+      comment_box("box")
+    end
+
+    local comment_box_line = function()
+      comment_box("line")
+    end
+
+    local key = "gcb"
+    return {
+      {
+        key,
+        desc = "Comment Box",
+      },
+      {
+        key.."c",
+        function() require("comment-box").catalog() end,
+        mode = { "n", "v" },
+        desc = "Catalog",
+      },
+      {
+        key.."b",
+        function() comment_box_box() end,
+        mode = { "n", "v" },
+        desc = "Box",
+      },
+      {
+        key.."l",
+        function() comment_box_line() end,
+        mode = { "n", "v" },
+        desc = "Line",
+      },
+      -- ──────────────────────────────────────────────────────────────────────
+      {
+        key.."B",
+        desc = "Preset Box",
+      },
+      {
+        key.."B1",
+        function() require("comment-box").ccbox(18) end,
+        mode = { "n", "v" },
+        desc = "CC Box 18",
+      },
+      {
+        key.."B2",
+        function() require("comment-box").ccbox(20) end,
+        mode = { "n", "v" },
+        desc = "CC Box 20",
+      },
+      {
+        key.."L",
+        desc = "Preset Line",
+      },
+      {
+        key.."L1",
+        function() require("comment-box").llline(1) end,
+        mode = { "n", "v" },
+        desc = "LL Line 1",
+      },
+      {
+        key.."L2",
+        function() require("comment-box").llline(6) end,
+        mode = { "n", "v" },
+        desc = "LL Line 6",
+      },
+      {
+        key.."L3",
+        function() require("comment-box").llline(12) end,
+        mode = { "n", "v" },
+        desc = "LL Line 12",
+      },
+    }
+    end,
 }
