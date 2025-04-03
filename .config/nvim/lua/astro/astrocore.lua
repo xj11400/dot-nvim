@@ -75,14 +75,6 @@ return {
         n = {
           -- toggleterm
           ["<Localleader>`"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
-          ["<Leader>tr"] = {
-            function() astro.toggle_term_cmd { cmd = "ranger", direction = "float" } end,
-            desc = "ToggleTerm Ranger",
-          },
-          ["<Leader>tj"] = {
-            function() astro.toggle_term_cmd { cmd = "joshuto", direction = "float" } end,
-            desc = "ToggleTerm Joshuto",
-          },
 
           -- heirline
           ['<Leader>b"'] = {
@@ -112,9 +104,10 @@ return {
           --
           ["<Leader>q"] = { "<Cmd>q<CR>", desc = "Quit" },
           ["<Localleader>q"] = { "<Cmd>confirm q<CR>", desc = "Quit" },
+          ["<Localleader>Q"] = { "<Cmd>confirm qall<CR>", desc = "Exit" },
           ["<Localleader>w"] = replace_key("n", "<Leader>w"),
           ["<Localleader>n"] = replace_key("n", "<Leader>n"),
-          ["<Localleader>Q"] = replace_key("n", "<Leader>Q"),
+          ["<Localleader>R"] = { function() require('astrocore').reload() end, desc = "Reload" },
 
           -- alpha
           ["<Localleader>h"] = replace_key("n", "<Leader>h"),
@@ -196,6 +189,7 @@ return {
           ["|"] = false,
           ["jj"] = false,
           ["jk"] = false,
+          ["<Leader>Q"] = false,
 
           -- heirline
           ["<Leader>b\\"] = false,
