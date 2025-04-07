@@ -11,4 +11,22 @@ return {
       },
     },
   },
+  specs = {
+    {
+      "AstroNvim/astrocore",
+      opts = function(_, opts)
+        local maps = opts.mappings
+        maps.n["<Leader>e"] = {
+          function()
+            if vim.bo.filetype == "neo-tree" then
+              vim.cmd.wincmd "p"
+            else
+              vim.cmd.Neotree "reveal_force_cwd"
+            end
+          end,
+          desc = "Toggle Explorer",
+        }
+      end,
+    },
+  },
 }
