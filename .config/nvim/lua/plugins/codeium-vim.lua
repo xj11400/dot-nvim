@@ -1,35 +1,35 @@
 return {
-  "Exafunction/codeium.vim",
-  cmd = {
-    "Codeium",
-    "CodeiumEnable",
-    "CodeiumDisable",
-    "CodeiumToggle",
-    "CodeiumAuto",
-    "CodeiumManual",
-  },
+  "Exafunction/windsurf.vim",
+  -- enabled = false,
   event = "BufEnter",
+  cmd = "Codeium",
+  build = ":Codeium Auth",
   config = function()
     vim.g.codeium_disable_bindings = 1 -- disable default bindings
     vim.g.codeium_no_map_tab = true -- disable tab insert
   end,
   keys = {
     {
-      "<Leader>;t",
+      "<Leader>;c",
+      mode = { "n" },
+      "",
+      desc = "Codeium",
+    },
+    {
+      "<Leader>;ct",
       mode = { "n" },
       "<Cmd>CodeiumToggle<CR>",
       noremap = true,
       desc = "Toggle Codeium active",
     },
     {
-      "<Leader>;;",
+      "<Leader>;cc",
       mode = { "n" },
-      function() return vim.fn["codeium#Chat()"]() end,
+      "<Cmd>CodeiumChat<CR>",
       noremap = true,
       desc = "Toggle Codeium Chat",
     },
     {
-      -- "<C-g>",
       "<Tab><Tab>",
       mode = { "i" },
       function() return vim.fn["codeium#Accept"]() end,
@@ -37,7 +37,22 @@ return {
       expr = true,
     },
     {
-      "<C-x>",
+      "<Tab>l",
+      mode = { "i" },
+      function() return vim.fn["codeium#AcceptNextLine"]() end,
+      desc = "Codeium Accept Line",
+      expr = true,
+    },
+    {
+      "<Tab>f",
+      mode = { "i" },
+      function() return vim.fn["codeium#AcceptNextWord"]() end,
+      desc = "Codeium Accept Word",
+      expr = true,
+    },
+    {
+      -- "<C-x>",
+      "<Tab>x",
       mode = { "i" },
       function() return vim.fn["codeium#Clear"]() end,
       desc = "Codeium Clear",
@@ -57,31 +72,5 @@ return {
     --   desc = "Codeium Cycle Completions",
     --   expr = true,
     -- },
-  },
-  dependencies = {
-    {
-      "AstroNvim/astroui",
-      ---@type AstroUIOpts
-      opts = {
-        icons = {
-          Codeium = "",
-        },
-      },
-    },
-    {
-      "AstroNvim/astrocore",
-      ---@param opts AstroCoreOpts
-      opts = function(_, opts)
-        return require("astrocore").extend_tbl(opts, {
-          mappings = {
-            n = {
-              ["<Leader>;"] = {
-                desc = require("astroui").get_icon("Codeium", 1, true) .. "Codeium",
-              },
-            },
-          },
-        })
-      end,
-    },
   },
 }
