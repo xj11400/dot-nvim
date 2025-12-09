@@ -101,7 +101,11 @@ return {
           ["<Localleader>Q"] = { "<Cmd>confirm qall<CR>", desc = "Exit" },
           ["<Localleader>w"] = replace_key("n", "<Leader>w"),
           ["<Localleader>n"] = replace_key("n", "<Leader>n"),
-          ["<Localleader>R"] = { function() require('astrocore').reload() end, desc = "Reload" },
+          ["<Localleader>R"] = { function() require("astrocore").reload() end, desc = "Reload" },
+          ["<Localleader>t"] = { desc = "Tab" },
+          ["<Localleader>tn"] = { "<Cmd>tabnew<CR>", desc = "New Tab" },
+          ["<Localleader>tc"] = { "<Cmd>tabclose<CR>", desc = "Close Tab" },
+          ["<Localleader>ts"] = { "<Cmd>tab split<CR>", desc = "Split Tab" },
 
           -- alpha
           ["<Localleader>h"] = replace_key("n", "<Leader>h"),
@@ -177,6 +181,9 @@ return {
           ["<Localleader>uY"] = replace_key("n", "<Leader>uF"),
           -- automatic signature
           ["<Localleader>u?"] = replace_key("n", "<Leader>u?"),
+
+          -- assistant category
+          ["<Leader>;"] = { desc = "Assistant" },
 
           --
           -- setting a mapping to false will disable it
