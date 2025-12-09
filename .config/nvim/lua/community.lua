@@ -13,10 +13,10 @@ return {
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.cmake" },
   { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.markdown" },
 
   -- import/override with your plugins folder
   { import = "astrocommunity.git.diffview-nvim" },
-  { import = "astrocommunity.keybinding.nvcheatsheet-nvim" },
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.markdown-and-latex.glow-nvim" },
   { import = "astrocommunity.diagnostics.trouble-nvim" },
@@ -34,4 +34,6 @@ return {
   --
   -- { import = "astrocommunity.note-taking.obsidian-nvim" },
   -- { import = "astrocommunity.note-taking.neorg" },
+
+  { import = "astrocommunity.recipes.ai" },
 }
