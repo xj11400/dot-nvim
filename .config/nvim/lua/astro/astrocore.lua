@@ -56,12 +56,16 @@ return {
       -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
       mappings = {
         v = {},
-        i = {},
+        i = {
+          -- toggleterm
+          ["<C-\\>"] = replace_key("n", "<C-'>"),
+        },
         c = {},
         t = {
           -- toggleterm
           ["<Localleader>`"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
           ["<Localleader><esc>"] = { "<C-\\><C-n>", desc = "Toggle terminal visual" },
+          ["<C-\\>"] = replace_key("v", "<C-'>"),
 
           -- disable to restore key functions, it has been mapping in AstroCore
           ["<C-H>"] = false,
@@ -70,8 +74,12 @@ return {
           ["<C-L>"] = false,
         },
         n = {
+          -- assistants category
+          ["<Leader>;"] = { desc = get_icon("Assistant", 1, true) .. "Assistant" },
+
           -- toggleterm
           ["<Localleader>`"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+          ["<C-\\>"] = replace_key("n", "<C-'>"),
 
           -- heirline
           ['<Leader>b"'] = {
@@ -102,10 +110,10 @@ return {
           ["<Localleader>w"] = replace_key("n", "<Leader>w"),
           ["<Localleader>n"] = replace_key("n", "<Leader>n"),
           ["<Localleader>R"] = { function() require("astrocore").reload() end, desc = "Reload" },
-          ["<Localleader>t"] = { desc = "Tab" },
-          ["<Localleader>tn"] = { "<Cmd>tabnew<CR>", desc = "New Tab" },
-          ["<Localleader>tc"] = { "<Cmd>tabclose<CR>", desc = "Close Tab" },
-          ["<Localleader>ts"] = { "<Cmd>tab split<CR>", desc = "Split Tab" },
+          ["<Leader>bt"] = { desc = "Tab" },
+          ["<Leader>btn"] = { "<Cmd>tabnew<CR>", desc = "New Tab" },
+          ["<Leader>btc"] = { "<Cmd>tabclose<CR>", desc = "Close Tab" },
+          ["<Leader>bts"] = { "<Cmd>tab split<CR>", desc = "Split Tab" },
 
           -- alpha
           ["<Localleader>h"] = replace_key("n", "<Leader>h"),
@@ -182,9 +190,6 @@ return {
           -- automatic signature
           ["<Localleader>u?"] = replace_key("n", "<Leader>u?"),
 
-          -- assistant category
-          ["<Leader>;"] = { desc = "Assistant" },
-
           --
           -- setting a mapping to false will disable it
           --
@@ -195,12 +200,26 @@ return {
           ["jk"] = false,
           ["<Leader>Q"] = false,
 
+          -- ui/ux
+          ["<Leader>u"] = false,
+
           -- neo-tree
           ["<Leader>o"] = false,
 
           -- heirline
           ["<Leader>b\\"] = false,
           ["<Leader>b|"] = false,
+
+          -- smart-splits: disable bindings in AstroNvim
+          ["<C-H>"] = false,
+          ["<C-J>"] = false,
+          ["<C-K>"] = false,
+          ["<C-L>"] = false,
+
+          -- toggleterm
+          ["<Leader>tu"] = false,
+          ["<Leader>tp"] = false,
+          ["<Leader>tn"] = false,
         },
       },
     })
