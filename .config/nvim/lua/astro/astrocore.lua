@@ -56,12 +56,16 @@ return {
       -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
       mappings = {
         v = {},
-        i = {},
+        i = {
+          -- toggleterm
+          ["<C-\\>"] = replace_key("n", "<C-'>"),
+        },
         c = {},
         t = {
           -- toggleterm
           ["<Localleader>`"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
           ["<Localleader><esc>"] = { "<C-\\><C-n>", desc = "Toggle terminal visual" },
+          ["<C-\\>"] = replace_key("v", "<C-'>"),
 
           -- disable to restore key functions, it has been mapping in AstroCore
           ["<C-H>"] = false,
@@ -70,8 +74,12 @@ return {
           ["<C-L>"] = false,
         },
         n = {
+          -- assistants category
+          ["<Leader>;"] = { desc = get_icon("Assistant", 1, true) .. "Assistant" },
+
           -- toggleterm
           ["<Localleader>`"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+          ["<C-\\>"] = replace_key("n", "<C-'>"),
 
           -- heirline
           ['<Leader>b"'] = {
@@ -92,6 +100,9 @@ return {
             end,
             desc = "Vertical split buffer from tabline",
           },
+
+          -- neo-tree
+          ["<Localleader>e"] = replace_key("n", "<Leader>e"),
 
           --
           -- mapping to Localleader
@@ -182,9 +193,6 @@ return {
           -- automatic signature
           ["<Localleader>u?"] = replace_key("n", "<Leader>u?"),
 
-          -- assistant category
-          ["<Leader>;"] = { desc = "Assistant" },
-
           --
           -- setting a mapping to false will disable it
           --
@@ -201,6 +209,17 @@ return {
           -- heirline
           ["<Leader>b\\"] = false,
           ["<Leader>b|"] = false,
+
+          -- smart-splits: disable bindings in AstroNvim
+          ["<C-H>"] = false,
+          ["<C-J>"] = false,
+          ["<C-K>"] = false,
+          ["<C-L>"] = false,
+
+          -- toggleterm
+          ["<Leader>tu"] = false,
+          ["<Leader>tp"] = false,
+          ["<Leader>tn"] = false,
         },
       },
     })
