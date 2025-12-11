@@ -3,24 +3,30 @@ return {
   "mikavilpas/yazi.nvim",
   event = "VeryLazy",
   keys = {
-    -- {
-    --   "<leader>-",
-    --   mode = { "n", "v" },
-    --   "<cmd>Yazi<cr>",
-    --   desc = "Open yazi at the current file",
-    -- },
+    {
+      "<Leader>ty",
+      mode = { "n", "v" },
+      "<cmd>Yazi<cr>",
+      desc = "Yazi",
+    },
+    {
+      "<Leader>tyy",
+      mode = { "n", "v" },
+      "<cmd>Yazi<cr>",
+      desc = "Yazi Current Directory",
+    },
     {
       -- Open in the current working directory
-      "<Leader>ty",
+      "<Leader>tyw",
       -- function() require("yazi").yazi(nil, vim.fn.getcwd()) end,
       "<cmd>Yazi cwd<cr>",
       desc = "Yazi Working Directory",
     },
-    -- {
-    --   "<c-up>",
-    --   "<cmd>Yazi toggle<cr>",
-    --   desc = "Resume the last yazi session",
-    -- },
+    {
+      "<Leader>-",
+      "<cmd>Yazi toggle<cr>",
+      desc = "Toggle Yazi",
+    },
   },
   ---@type YaziConfig
   opts = {
