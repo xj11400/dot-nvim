@@ -10,6 +10,9 @@ local _zx = require "colors.zx"
 -- local get_hlgroup = require("astroui").get_hlgroup
 -- local _TabLine = get_hlgroup("TabLine", { fg = _zx.base.grey, bg = _zx.base.none })
 -- local _Normal = get_hlgroup("Normal", { fg = _zx.base.fg, bg = _zx.base.bg })
+--
+-- local _mini_icons = require "mini.icons"
+-- _mini_icons.get("default", "directory")
 
 return {
   "AstroNvim/astroui",
@@ -53,6 +56,8 @@ return {
       PowerOff = "",
       Save = "",
       ForceWrite = "",
+      Assistant = "",
+      Directory = "",
       -- configure the loading of the lsp in the status line
       LSPLoading1 = "⠋",
       LSPLoading2 = "⠙",
@@ -67,8 +72,8 @@ return {
     },
     lazygit = {
       theme = {
-        activeBorderColor = { fg = _zx.ui.blue, bold = true },
+        activeBorderColor = { fg = "Title", bold = true },
       },
-    }
+    },
   },
 }
