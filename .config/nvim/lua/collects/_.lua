@@ -1,0 +1,73 @@
+return {
+  -- "/",
+  -- enabled = false,
+  -- event = "BufEnter",
+  -- cmd = "",
+  -- config = function(plugin, opts)
+  --   opts = vim.tbl_deep_extend("force", opts, {
+  --   }
+  --   return opts
+  -- end,
+  -- opts = function(_, opts)
+  --   opts = vim.tbl_deep_extend("force", opts, {
+  --   }
+  --   return opts
+  -- end,
+  -- keys = {
+  -- },
+  -- dependencies = {
+  --   {
+  --     "AstroNvim/astroui",
+  --     ---@type AstroUIOpts
+  --     opts = {
+  --       icons = {
+  --         Codeium = "",
+  --       },
+  --     },
+  --   },
+  --   {
+  --     "AstroNvim/astrocore",
+  --     ---@param opts AstroCoreOpts
+  --     opts = function(_, opts)
+  --       return require("astrocore").extend_tbl(opts, {
+  --         mappings = {
+  --           n = {
+  --             ["<Leader>;c"] = {
+  --               desc = require("astroui").get_icon("Codeium", 1, true) .. "Codeium",
+  --             },
+  --           },
+  --         },
+  --       })
+  --     end,
+  --   },
+  -- },
+  -- specs = {
+  --   {
+  --     "AstroNvim/astrocore",
+  --     opts = function(_, opts)
+  --       -- Alternate startup
+  --
+  --       opts.autocmds.neotree_start = nil
+  --       opts.autocmds.snacks_start = {
+  --         {
+  --           event = "BufEnter",
+  --           desc = "Open Snacks Explorer on startup with directory",
+  --           callback = function()
+  --             if package.loaded["snacks"] then
+  --               require("snacks").explorer { hidden = true, layout="default", }
+  --               return true
+  --             else
+  --               local stats = vim.uv.fs_stat(vim.api.nvim_buf_get_name(0))
+  --               if stats and stats.type == "directory" then
+  --                 require("lazy").load { plugins = { "snacks.nvim" } }
+  --                 require("snacks").explorer { hidden = true }
+  --                 return true
+  --               end
+  --             end
+  --           end,
+  --         },
+  --       }
+  --     end,
+  --   },
+  -- },
+}
