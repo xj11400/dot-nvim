@@ -230,6 +230,28 @@ return {
     -- options
     opts.options = vim.tbl_deep_extend("force", opts.options, require "configs.options")
 
+    -- Disable default keymap
+    vim.keymap.del({ "n", "x", "o" }, "gc")
+    vim.keymap.del("n", "gcc")
+    vim.keymap.set({ "n", "x", "o" }, "gc", "", { desc = "Toggle comment" })
+    --- Default maps for built-in commenting.
+    --- See |gc-default| and |gcc-default|.
+    --- gc -> gcc, gcc -> gcl
+    do
+      local operator_rhs = function() return require("vim._comment").operator() end
+      vim.keymap.set({ "n", "x" }, "gcc", operator_rhs, { expr = true, desc = "Toggle comment" })
+
+      local line_rhs = function() return require("vim._comment").operator() .. "_" end
+      vim.keymap.set("n", "gcl", line_rhs, { expr = true, desc = "Toggle comment line" })
+
+      local textobject_rhs = function() require("vim._comment").textobject() end
+      vim.keymap.set({ "o" }, "gcc", textobject_rhs, { desc = "Comment textobject" })
+
+      local maps = opts.mappings
+      maps.n["<Leader>/"] = { line_rhs(), desc = "Toggle comment line" }
+      maps.x["<Leader>/"] = { operator_rhs(), desc = "Toggle comment" }
+    end
+
     return opts
   end,
 }
