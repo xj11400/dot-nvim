@@ -39,101 +39,111 @@ return {
       local cb = vim.fn.input("CB[x][y]" .. bl .. "[n] (xyn/help:?): ")
 
       -- help
-      if cb == '?' then
+      if cb == "?" then
         print(
-          "CB[x][y]".. bl .. "[n]:\n" ..
-          "position           : x (l, c, r)\n" ..
-          "text justification : y (l, c, r, a)\n" ..
-          "style              : n (number)\n" ..
-          "Choose predefined style from the catalog.")
+          "CB[x][y]"
+            .. bl
+            .. "[n]:\n"
+            .. "position           : x (l, c, r)\n"
+            .. "text justification : y (l, c, r, a)\n"
+            .. "style              : n (number)\n"
+            .. "Choose predefined style from the catalog."
+        )
         return
       end
 
       -- verify
-      local x, y, style = cb:match("([lcr])([lcra])(.*)")
+      local x, y, style = cb:match "([lcr])([lcra])(.*)"
 
       if x and y then
-          style = style ~= "" and tonumber(style) or nil
+        style = style ~= "" and tonumber(style) or nil
       else
-          print("Invalid input")
-          return
+        print "Invalid input"
+        return
       end
 
       -- command
       vim.api.nvim_command("CB" .. x .. y .. bl .. style)
     end
 
-    local comment_box_box = function()
-      comment_box("box")
-    end
+    local comment_box_box = function() comment_box "box" end
 
-    local comment_box_line = function()
-      comment_box("line")
-    end
+    local comment_box_line = function() comment_box "line" end
 
     local key = "gcb"
     return {
+      -- ──────────────────────────────────────────────────────────────────────
       {
         key,
+        "",
+        mode = { "n", "v" },
         desc = "Comment Box",
       },
       {
-        key.."c",
+        key .. "c",
         function() require("comment-box").catalog() end,
         mode = { "n", "v" },
         desc = "Catalog",
       },
       {
-        key.."b",
+        key .. "b",
         function() comment_box_box() end,
         mode = { "n", "v" },
         desc = "Box",
       },
       {
-        key.."l",
+        key .. "l",
         function() comment_box_line() end,
         mode = { "n", "v" },
         desc = "Line",
       },
       -- ──────────────────────────────────────────────────────────────────────
       {
-        key.."B",
+        key .. "B",
+        mode = { "n", "v" },
         desc = "Preset Box",
       },
       {
-        key.."B1",
+        key .. "B1",
         function() require("comment-box").ccbox(18) end,
         mode = { "n", "v" },
         desc = "CC Box 18",
       },
       {
-        key.."B2",
+        key .. "B2",
         function() require("comment-box").ccbox(20) end,
         mode = { "n", "v" },
         desc = "CC Box 20",
       },
       {
-        key.."L",
+        key .. "L",
+        mode = { "n", "v" },
         desc = "Preset Line",
       },
       {
-        key.."L1",
+        key .. "L1",
         function() require("comment-box").llline(1) end,
         mode = { "n", "v" },
         desc = "LL Line 1",
       },
       {
-        key.."L2",
+        key .. "L2",
+        function() require("comment-box").llline(2) end,
+        mode = { "n", "v" },
+        desc = "LL Line 2",
+      },
+      {
+        key .. "L3",
         function() require("comment-box").llline(6) end,
         mode = { "n", "v" },
         desc = "LL Line 6",
       },
       {
-        key.."L3",
+        key .. "L4",
         function() require("comment-box").llline(12) end,
         mode = { "n", "v" },
         desc = "LL Line 12",
       },
     }
-    end,
+  end,
 }
