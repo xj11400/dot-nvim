@@ -1,3 +1,5 @@
+-- if true then return {} end -- NOTE: remove this line to activate this file
+
 -- NOTE: nvim-treesitter latex require tree-sitter cli
 return {
   {
