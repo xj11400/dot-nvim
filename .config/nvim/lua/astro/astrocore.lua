@@ -13,19 +13,6 @@ return {
     local astro = require "astrocore"
     local get_icon = require("astroui").get_icon
 
-    local replace_key = function(mode, key)
-      local maps = assert(opts.mappings)
-      local tmp = vim.tbl_get(maps, mode)[key]
-      vim.tbl_get(maps, mode)[key] = false
-      return tmp
-    end
-
-    local get_key = function(mode, key)
-      local maps = assert(opts.mappings)
-      local tmp = vim.tbl_get(maps, mode)[key]
-      return tmp
-    end
-
     opts = vim.tbl_deep_extend("force", opts, {
       -- Configure core features of AstroNvim
       features = {
@@ -56,184 +43,218 @@ return {
       -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
       mappings = {
         v = {},
-        i = {
-          -- toggleterm
-          ["<C-\\>"] = replace_key("n", "<C-'>"),
-        },
+        i = {},
         c = {},
-        t = {
-          -- toggleterm
-          ["<Localleader>`"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
-          ["<Localleader><esc>"] = { "<C-\\><C-n>", desc = "Toggle terminal visual" },
-          ["<C-\\>"] = replace_key("v", "<C-'>"),
-
-          -- disable to restore key functions, it has been mapping in AstroCore
-          ["<C-H>"] = false,
-          ["<C-J>"] = false,
-          ["<C-K>"] = false,
-          ["<C-L>"] = false,
-        },
-        n = {
-          -- assistants category
-          ["<Leader>;"] = { desc = get_icon("Assistant", 1, true) .. "Assistant" },
-
-          -- toggleterm
-          ["<Localleader>`"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
-          ["<C-\\>"] = replace_key("n", "<C-'>"),
-
-          -- heirline
-          ['<Leader>b"'] = {
-            function()
-              require("astroui.status.heirline").buffer_picker(function(bufnr)
-                vim.cmd.split()
-                vim.api.nvim_win_set_buf(0, bufnr)
-              end)
-            end,
-            desc = "Horizontal split buffer from tabline",
-          },
-          ["<Leader>b%"] = {
-            function()
-              require("astroui.status.heirline").buffer_picker(function(bufnr)
-                vim.cmd.vsplit()
-                vim.api.nvim_win_set_buf(0, bufnr)
-              end)
-            end,
-            desc = "Vertical split buffer from tabline",
-          },
-
-          --
-          -- mapping to Localleader
-          --
-          ["<Leader>q"] = { "<Cmd>q<CR>", desc = "Quit" },
-          ["<Localleader>q"] = { "<Cmd>confirm q<CR>", desc = "Quit" },
-          ["<Localleader>Q"] = { "<Cmd>confirm qall<CR>", desc = "Exit" },
-          ["<Localleader>w"] = replace_key("n", "<Leader>w"),
-          ["<Localleader>n"] = replace_key("n", "<Leader>n"),
-          ["<Localleader>R"] = { function() require("astrocore").reload() end, desc = "Reload" },
-          ["<Leader>bt"] = { desc = "Tab" },
-          ["<Leader>btn"] = { "<Cmd>tabnew<CR>", desc = "New Tab" },
-          ["<Leader>btc"] = { "<Cmd>tabclose<CR>", desc = "Close Tab" },
-          ["<Leader>bts"] = { "<Cmd>tab split<CR>", desc = "Split Tab" },
-
-          -- alpha
-          ["<Localleader>h"] = replace_key("n", "<Leader>h"),
-
-          -- Plugin Manager
-          ["<Localleader>p"] = replace_key("n", "<Leader>p"),
-          ["<Localleader>pa"] = replace_key("n", "<Leader>pa"),
-          ["<Localleader>pi"] = replace_key("n", "<Leader>pi"),
-          ["<Localleader>ps"] = replace_key("n", "<Leader>ps"),
-          ["<Localleader>pS"] = replace_key("n", "<Leader>pS"),
-          ["<Localleader>pu"] = replace_key("n", "<Leader>pu"),
-          ["<Localleader>pU"] = replace_key("n", "<Leader>pU"),
-          ["<Localleader>pm"] = replace_key("n", "<Leader>pm"),
-          ["<Localleader>pM"] = replace_key("n", "<Leader>pM"),
-
-          -- Session
-          ["<Localleader>s"] = replace_key("n", "<Leader>S"),
-          ["<Localleader>sl"] = replace_key("n", "<Leader>Sl"),
-          ["<Localleader>ss"] = replace_key("n", "<Leader>Ss"),
-          ["<Localleader>sS"] = replace_key("n", "<Leader>SS"),
-          ["<Localleader>st"] = replace_key("n", "<Leader>St"),
-          ["<Localleader>sd"] = replace_key("n", "<Leader>Sd"),
-          ["<Localleader>sD"] = replace_key("n", "<Leader>SD"),
-          ["<Localleader>sf"] = replace_key("n", "<Leader>Sf"),
-          ["<Localleader>sF"] = replace_key("n", "<Leader>SF"),
-          ["<Localleader>s."] = replace_key("n", "<Leader>S."),
-
-          -- UI/UX
-          ["<Localleader>u"] = get_key("n", "<Leader>u"),
-          ["<Localleader>uA"] = replace_key("n", "<Leader>uA"),
-          ["<Localleader>ub"] = replace_key("n", "<Leader>ub"),
-          ["<Localleader>ud"] = replace_key("n", "<Leader>ud"),
-          ["<Localleader>ug"] = replace_key("n", "<Leader>ug"),
-          ["<Localleader>u>"] = replace_key("n", "<Leader>u>"),
-          ["<Localleader>ui"] = replace_key("n", "<Leader>ui"),
-          ["<Localleader>ul"] = replace_key("n", "<Leader>ul"),
-          ["<Localleader>un"] = replace_key("n", "<Leader>un"),
-          ["<Localleader>uN"] = replace_key("n", "<Leader>uN"),
-          ["<Localleader>up"] = replace_key("n", "<Leader>up"),
-          ["<Localleader>us"] = replace_key("n", "<Leader>us"),
-          ["<Localleader>uS"] = replace_key("n", "<Leader>uS"),
-          ["<Localleader>ut"] = replace_key("n", "<Leader>ut"),
-          ["<Localleader>uu"] = replace_key("n", "<Leader>uu"),
-          ["<Localleader>uw"] = replace_key("n", "<Leader>uw"),
-          ["<Localleader>uy"] = replace_key("n", "<Leader>uy"),
-          ["<Localleader>uv"] = replace_key("n", "<Leader>uv"),
-          ["<Localleader>uV"] = replace_key("n", "<Leader>uV"),
-          ["<Localleader>uZ"] = replace_key("n", "<Leader>uZ"),
-
-          -- autopairs
-          ["<Localleader>ua"] = replace_key("n", "<Leader>ua"),
-          -- notify
-          ["<Localleader>uD"] = replace_key("n", "<Leader>uD"),
-          -- indent-blankline
-          ["<Localleader>u|"] = replace_key("n", "<Leader>u|"),
-          -- colorizer
-          ["<Localleader>uz"] = replace_key("n", "<Leader>uz"),
-          -- cmp_lunasnip
-          ["<Localleader>uc"] = replace_key("n", "<Leader>uc"),
-          ["<Localleader>uC"] = replace_key("n", "<Leader>uC"),
-          -- vim-illuminate
-          ["<Localleader>ur"] = replace_key("n", "<Leader>ur"),
-          ["<Localleader>uR"] = replace_key("n", "<Leader>uR"),
-          -- autoformatting
-          ["<Localleader>uf"] = replace_key("n", "<Leader>uf"),
-          ["<Localleader>uF"] = replace_key("n", "<Leader>uF"),
-          -- lsp inlay hint
-          ["<Localleader>uh"] = replace_key("n", "<Leader>uh"),
-          ["<Localleader>uH"] = replace_key("n", "<Leader>uH"),
-          -- CodeLens
-          ["<Localleader>uL"] = replace_key("n", "<Leader>uL"),
-          -- lsp sematic highlight
-          ["<Localleader>uY"] = replace_key("n", "<Leader>uF"),
-          -- automatic signature
-          ["<Localleader>u?"] = replace_key("n", "<Leader>u?"),
-
-          --
-          -- setting a mapping to false will disable it
-          --
-
-          ["\\"] = false,
-          ["|"] = false,
-          ["jj"] = false,
-          ["jk"] = false,
-          ["<Leader>Q"] = false,
-
-          -- ui/ux
-          ["<Leader>u"] = false,
-
-          -- neo-tree
-          ["<Leader>o"] = false,
-
-          -- heirline
-          ["<Leader>b\\"] = false,
-          ["<Leader>b|"] = false,
-
-          -- smart-splits: disable bindings in AstroNvim
-          ["<C-H>"] = false,
-          ["<C-J>"] = false,
-          ["<C-K>"] = false,
-          ["<C-L>"] = false,
-
-          -- toggleterm
-          ["<Leader>tu"] = false,
-          ["<Leader>tp"] = false,
-          ["<Leader>tn"] = false,
-        },
+        t = {},
+        n = {},
       },
     })
 
-    -- mappings
-    opts.mappings = vim.tbl_deep_extend("force", opts.mappings, require "configs.mappings")
+    --
+    -- Mapping Functions
+    --
 
-    -- options
-    opts.options = vim.tbl_deep_extend("force", opts.options, require "configs.options")
+    local set_mapping = function(mode, key, value)
+      local maps = assert(opts.mappings)
+      local modes = type(mode) == "table" and mode or { mode }
 
+      for _, m in ipairs(modes) do
+        if not maps[m] then maps[m] = {} end
+        maps[m][key] = value
+      end
+    end
+
+    local replace_mapping = function(mode, source_key, to_key)
+      local maps = assert(opts.mappings)
+
+      local modes = type(mode) == "table" and mode or { mode }
+
+      for _, m in ipairs(modes) do
+        local mode_map = maps[m]
+
+        if mode_map and mode_map[source_key] ~= nil then
+          local tmp = mode_map[source_key]
+          mode_map[source_key] = false
+          mode_map[to_key] = tmp
+        end
+      end
+    end
+
+    local disable_mapping = function(mode, key)
+      local maps = assert(opts.mappings)
+      local modes = type(mode) == "table" and mode or { mode }
+
+      for _, m in ipairs(modes) do
+        local mode_map = maps[m]
+        if mode_map and mode_map[key] ~= nil then mode_map[key] = false end
+      end
+    end
+
+    local get_key = function(mode, key)
+      local maps = assert(opts.mappings)
+      local tmp = vim.tbl_get(maps, mode)[key]
+      return tmp
+    end
+
+    --
+    -- Mappings
+    --
+
+    -- assistants category
+    set_mapping("n", "<Leader>;", { desc = get_icon("Assistant", 1, true) .. "Assistant" })
+
+    -- toggleterm
+    set_mapping({ "n", "t" }, "<Localleader>`", { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" })
+    set_mapping("t", "<Localleader><esc>", { "<C-\\><C-n>", desc = "Toggle terminal visual" })
+    replace_mapping({ "n", "t", "i" }, "<C-'>", "<C-\\>")
+
+    -- heirline
+    set_mapping("n", '<Leader>b"', {
+      function()
+        require("astroui.status.heirline").buffer_picker(function(bufnr)
+          vim.cmd.split()
+          vim.api.nvim_win_set_buf(0, bufnr)
+        end)
+      end,
+      desc = "Horizontal split buffer from tabline",
+    })
+    set_mapping("n", "<Leader>b%", {
+      function()
+        require("astroui.status.heirline").buffer_picker(function(bufnr)
+          vim.cmd.vsplit()
+          vim.api.nvim_win_set_buf(0, bufnr)
+        end)
+      end,
+      desc = "Vertical split buffer from tabline",
+    })
+
+    -- mapping to Localleader
+    set_mapping("n", "<Leader>q", { "<Cmd>q<CR>", desc = "Quit" })
+    set_mapping("n", "<Localleader>q", { "<Cmd>confirm q<CR>", desc = "Quit" })
+    set_mapping("n", "<Localleader>Q", { "<Cmd>confirm qall<CR>", desc = "Exit" })
+    replace_mapping("n", "<Leader>w", "<Localleader>w")
+    replace_mapping("n", "<Leader>n", "<Localleader>n")
+    set_mapping("n", "<Localleader>R", { function() require("astrocore").reload() end, desc = "Reload" })
+    set_mapping("n", "<Leader>bt", { desc = "Tab" })
+    set_mapping("n", "<Leader>btn", { "<Cmd>tabnew<CR>", desc = "New Tab" })
+    set_mapping("n", "<Leader>btc", { "<Cmd>tabclose<CR>", desc = "Close Tab" })
+    set_mapping("n", "<Leader>bts", { "<Cmd>tab split<CR>", desc = "Split Tab" })
+
+    --
+    -- Replace mappings
+    --
+
+    -- alpha
+    replace_mapping("n", "<Leader>h", "<Localleader>h")
+
+    -- Plugin Manager
+    replace_mapping("n", "<Leader>p", "<Localleader>p")
+    replace_mapping("n", "<Leader>pa", "<Localleader>pa")
+    replace_mapping("n", "<Leader>pi", "<Localleader>pi")
+    replace_mapping("n", "<Leader>ps", "<Localleader>ps")
+    replace_mapping("n", "<Leader>pS", "<Localleader>pS")
+    replace_mapping("n", "<Leader>pu", "<Localleader>pu")
+    replace_mapping("n", "<Leader>pU", "<Localleader>pU")
+    replace_mapping("n", "<Leader>pm", "<Localleader>pm")
+    replace_mapping("n", "<Leader>pM", "<Localleader>pM")
+
+    -- Session
+    replace_mapping("n", "<Leader>S", "<Localleader>s")
+    replace_mapping("n", "<Leader>Sl", "<Localleader>sl")
+    replace_mapping("n", "<Leader>Ss", "<Localleader>ss")
+    replace_mapping("n", "<Leader>SS", "<Localleader>sS")
+    replace_mapping("n", "<Leader>St", "<Localleader>st")
+    replace_mapping("n", "<Leader>Sd", "<Localleader>sd")
+    replace_mapping("n", "<Leader>SD", "<Localleader>sD")
+    replace_mapping("n", "<Leader>Sf", "<Localleader>sf")
+    replace_mapping("n", "<Leader>SF", "<Localleader>sF")
+    replace_mapping("n", "<Leader>S.", "<Localleader>s.")
+
+    -- UI/UX
+    replace_mapping("n", "<Leader>u", "<Localleader>u")
+    replace_mapping("n", "<Leader>uA", "<Localleader>uA")
+    replace_mapping("n", "<Leader>ub", "<Localleader>ub")
+    replace_mapping("n", "<Leader>ud", "<Localleader>ud")
+    replace_mapping("n", "<Leader>ug", "<Localleader>ug")
+    replace_mapping("n", "<Leader>u>", "<Localleader>u>")
+    replace_mapping("n", "<Leader>ui", "<Localleader>ui")
+    replace_mapping("n", "<Leader>ul", "<Localleader>ul")
+    replace_mapping("n", "<Leader>un", "<Localleader>un")
+    replace_mapping("n", "<Leader>uN", "<Localleader>uN")
+    replace_mapping("n", "<Leader>up", "<Localleader>up")
+    replace_mapping("n", "<Leader>us", "<Localleader>us")
+    replace_mapping("n", "<Leader>uS", "<Localleader>uS")
+    replace_mapping("n", "<Leader>ut", "<Localleader>ut")
+    replace_mapping("n", "<Leader>uu", "<Localleader>uu")
+    replace_mapping("n", "<Leader>uw", "<Localleader>uw")
+    replace_mapping("n", "<Leader>uy", "<Localleader>uy")
+    replace_mapping("n", "<Leader>uv", "<Localleader>uv")
+    replace_mapping("n", "<Leader>uV", "<Localleader>uV")
+    replace_mapping("n", "<Leader>uZ", "<Localleader>uZ")
+
+    -- autopairs
+    replace_mapping("n", "<Leader>ua", "<Localleader>ua")
+    -- notify
+    replace_mapping("n", "<Leader>uD", "<Localleader>uD")
+    -- indent-blankline
+    replace_mapping("n", "<Leader>u|", "<Localleader>u|")
+    -- colorizer
+    replace_mapping("n", "<Leader>uz", "<Localleader>uz")
+    -- cmp_lunasnip
+    replace_mapping("n", "<Leader>uc", "<Localleader>uc")
+    replace_mapping("n", "<Leader>uC", "<Localleader>uC")
+    -- vim-illuminate
+    replace_mapping("n", "<Leader>ur", "<Localleader>ur")
+    replace_mapping("n", "<Leader>uR", "<Localleader>uR")
+    -- autoformatting
+    replace_mapping("n", "<Leader>uf", "<Localleader>uf")
+    replace_mapping("n", "<Leader>uF", "<Localleader>uF")
+    -- lsp inlay hint
+    replace_mapping("n", "<Leader>uh", "<Localleader>uh")
+    replace_mapping("n", "<Leader>uH", "<Localleader>uH")
+    -- CodeLens
+    replace_mapping("n", "<Leader>uL", "<Localleader>uL")
+    -- lsp sematic highlight
+    replace_mapping("n", "<Leader>uF", "<Localleader>uY")
+    -- automatic signature
+    replace_mapping("n", "<Leader>u?", "<Localleader>u?")
+
+    --
+    -- Disable mappings
+    --
+
+    -- setting a mapping to false will disable it
+    disable_mapping("n", "\\")
+    disable_mapping("n", "|")
+    disable_mapping("n", "jj")
+    disable_mapping("n", "jk")
+    disable_mapping("n", "<Leader>Q")
+
+    -- smart-splits: disable bindings in AstroNvim
+    disable_mapping({ "n", "t" }, "<C-H>")
+    disable_mapping({ "n", "t" }, "<C-J>")
+    disable_mapping({ "n", "t" }, "<C-K>")
+    disable_mapping({ "n", "t" }, "<C-L>")
+
+    -- neo-tree
+    disable_mapping("n", "<Leader>o")
+
+    -- heirline
+    disable_mapping("n", "<Leader>b\\")
+    disable_mapping("n", "<Leader>b|")
+
+    -- toggleterm
+    disable_mapping("n", "<Leader>tu")
+    disable_mapping("n", "<Leader>tp")
+    disable_mapping("n", "<Leader>tn")
+
+    --
     -- Disable default keymap
+    --
     vim.keymap.del({ "n", "x", "o" }, "gc")
     vim.keymap.del("n", "gcc")
     vim.keymap.set({ "n", "x", "o" }, "gc", "", { desc = "Toggle comment" })
+
     --- Default maps for built-in commenting.
     --- See |gc-default| and |gcc-default|.
     --- gc -> gcc, gcc -> gcl
@@ -251,6 +272,16 @@ return {
       maps.n["<Leader>/"] = { line_rhs(), desc = "Toggle comment line" }
       maps.x["<Leader>/"] = { operator_rhs(), desc = "Toggle comment" }
     end
+
+    --
+    -- Load configs
+    --
+
+    -- mappings
+    opts.mappings = vim.tbl_deep_extend("force", opts.mappings, require "configs.mappings")
+
+    -- options
+    opts.options = vim.tbl_deep_extend("force", opts.options, require "configs.options")
 
     return opts
   end,
