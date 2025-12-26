@@ -35,15 +35,33 @@ return {
         },
       },
       picker = {
+        actions = {
+          change_cwd = function(picker)
+
+            local item = picker:current()
+            if not item or not item.file then return end
+
+            -- Get the target directory: use item.file if it's a directory,
+            --    otherwise get the parent directory of the file.
+            local target_dir = vim.fn.isdirectory(item.file) == 1 and item.file or vim.fn.fnamemodify(item.file, ":p:h")
+
+            -- Update Neovim's global current working directory (CWD).
+            vim.api.nvim_set_current_dir(target_dir)
+
+            -- Update the Explorer UI to reflect the new directory.
+            picker:set_cwd(target_dir)
+
+            -- notify
+            require("snacks").notifier.notify("CWD changed to: " .. target_dir, "info", {
+              title = "Explorer",
+              icon = "󱁤 ",
+            })
+          end,
+        },
         win = {
           input = {
             keys = {
               ["<C-J>"] = { "confirm", mode = { "n", "i" } },
-            },
-          },
-          list = {
-            keys = {
-              ["<C-J>"] = "confirm",
             },
           },
         },
@@ -59,6 +77,13 @@ return {
             auto_close = true,
             tree = true,
             layout = "default",
+            win = {
+              list = {
+                keys = {
+                  ["="] = { "change_cwd", desc = "change cwd", mode = { "n", "i" } },
+                },
+              },
+            },
           },
           grep = { hidden = true },
         },
@@ -106,6 +131,22 @@ return {
       "AstroNvim/astrocore",
       opts = function(_, opts)
         opts.autocmds.neotree_start = nil -- disable neotree on start
+
+        -- already have autocmd to dothis when vim enter
+        -- opts.autocmds.snacks_start = {
+        --   {
+        --     event = "BufEnter",
+        --     desc = "Open Snacks Explorer on startup with directory",
+        --     callback = function()
+        --       local stats = vim.uv.fs_stat(vim.api.nvim_buf_get_name(0))
+        --       if stats and stats.type == "directory" then
+        --         -- change the current working directory
+        --         vim.api.nvim_set_current_dir(vim.api.nvim_buf_get_name(0))
+        --         return true
+        --       end
+        --     end,
+        --   },
+        -- }
       end,
     },
   },
